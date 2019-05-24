@@ -14,3 +14,13 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery
+//= require jquery_ujs
+
+$(document).ready(function () {
+    $(".pagetop").click(function () {
+        $("html, body").animate({
+            "scrollTop": 0
+        }, "slow");
+    });
+});

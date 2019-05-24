@@ -1,0 +1,29 @@
+<section>
+    <h1>お問い合わせ</h1>
+    <%= form_tag("/send_email", class: "green-form") do %>
+    <div class="green-form-box3">
+        <div class="green-form-box6">
+            <p>メールアドレス</p>
+        </div>
+        <div class="green-form-box2">
+            <input type="email" name="email" style="width:100%">
+        </div>
+    </div>
+        <div class="green-form-box1">
+        <div class="green-form-box6">
+            <p>件名</p>
+        </div>
+        <div class="green-form-box2">
+            <input type="text" name="title" style="width:100%">
+        </div>
+    </div>
+        <div class="green-form-box1">
+        <div class="green-form-box6">
+            <p>内容</p>
+        </div>
+        <textarea name="content">
+        </textarea>
+    </div>
+    <input type="submit" value="送信">
+    <% end %>
+</section>

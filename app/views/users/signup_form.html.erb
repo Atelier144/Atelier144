@@ -1,0 +1,47 @@
+<section>
+    <h1>新規登録</h1>
+    <%= form_tag("/signup", class: "green-form") do %>
+    <div class="green-form-box3">
+        <div class="green-form-box2">
+            <p>ユーザーネーム</p>
+            <input type="text" style="width:480px">
+        </div>
+    </div>
+    <div class="green-form-box1">
+        <div class="green-form-box2">
+            <p>メールアドレス</p>
+            <input type="email" style="width:480px">
+        </div>
+    </div>
+    <div class="green-form-box1">
+        <div class="green-form-box2">
+            <p>パスワード</p>
+            <input type="password" style="width:480px">
+        </div>
+        <div class="green-form-box4">
+            <div class="green-form-note1" style="width:480px">8字以上、32字以下</div>
+        </div>
+        <div class="green-form-box4">
+            <!-- スペース -->
+        </div>
+        <div class="green-form-box2">
+            <input type="password" style="width:480px">
+        </div>
+        <div class="green-form-box4">
+            <div class="green-form-note1"  style="width:480px">確認のため、再入力してください</div>
+        </div>
+    </div>
+    <div class="green-form-box1">
+        <div class="green-form-box2">
+            <p>利用規約に</p>
+            <div class="green-form-box5" style="width:160px; right:320px">
+                <input type="radio" name="agreement" value="agree"><span class="green-form-note2">同意します</span>
+            </div>
+            <div class="green-form-box5" style="width:160px; right:160px">
+                <input type="radio" name="agreement" value="disagree" checked><span class="green-form-note2">同意しません</span>
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="登録">
+    <% end %>
+</section>

@@ -10,6 +10,63 @@
   </head>
 
   <body>
+   <header>
+       <%= link_to("", "/", class: "header-logo") %>
+       <ul class="header-menu">
+           <li>
+               <%= link_to("ブラウザゲーム集","/games") %>
+           </li>
+           <li>
+               <%= link_to("アプリ集","/apps") %>
+           </li>
+           <li>
+               <div class="header-menu-border"></div>
+           </li>
+           <% if false %>
+           <% else %>
+           <li>
+               <%= link_to("ログイン", "/login") %>
+           </li>
+           <li>
+               <%= link_to("新規登録", "/signup") %>
+           </li>
+           <% end %>
+       </ul>
+   </header>
     <%= yield %>
+    <footer>
+        <ul class="footer-menu">
+            <li>
+                <%= link_to("ホーム", "/") %>
+            </li>
+            <li>
+                <%= link_to("ブラウザゲーム集", "/games") %>
+            </li>
+            <li>
+                <%= link_to("アプリ集", "/apps") %>
+            </li>
+            <li>
+                <%= link_to("更新情報", "/news") %>
+            </li>
+            <li>
+                <%= link_to("利用規約", "/terms") %>
+            </li>
+            <li>
+                <%= link_to("プライバシーポリシー", "/privacy") %>
+            </li>
+            <li>
+                <%= link_to("お問い合わせ", "/contact") %>
+            </li>
+        </ul>
+        <p class="footer-sns-headline">公式SNS</p>
+        <ul class="footer-menu-sns">
+            <li>
+                <a href="/"><%= image_tag("Twitter.png") %></a>
+                <a href="/"><%= image_tag("Facebook.png") %></a>
+            </li>
+        </ul>
+        <p class="footer-copyright">Copyright(C) 2019 Atelier144 All Rights Reserved.</p>
+    </footer>
+    <div class="pagetop"></div>
   </body>
 </html>
