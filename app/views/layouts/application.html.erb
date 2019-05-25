@@ -22,7 +22,7 @@
            <li>
                <div class="header-menu-border"></div>
            </li>
-           <% if true %>
+           <% if @current_user %>
               <li>
                <%= link_to("/mypage") do %>
                <%= image_tag("UserImage.png") %>

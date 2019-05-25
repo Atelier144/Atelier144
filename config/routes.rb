@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   get "/mypage", to: "users#mypage"
   get "/users/:id", to: "users#show"
   get "/login" , to: "users#login_form"
+  post "/login", to: "users#login"
+  post "/logout", to: "users#logout"
   get "/signup", to: "users#signup_form"
+  post "/signup", to: "users#signup"
 
   get "/games/infinite_blocks", to: "infinite_blocks#home"
   get "/games/infinite_blocks/records", to: "infinite_blocks#records"

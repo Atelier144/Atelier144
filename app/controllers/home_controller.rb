@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def top
+    @news = News.all
   end
 
   def games
@@ -19,6 +20,8 @@ class HomeController < ApplicationController
 
   end
   def contact
-    
+    if @current_user
+      @email = @current_user.email
+    end
   end
 end

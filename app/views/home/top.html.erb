@@ -6,13 +6,13 @@
 <section id="news-section">
     <h2>更新情報</h2>
     <div class="news-container">
-        <% for i in 1..5 %>
+        <% @news.each do |anew| %>
         <div class="news-record">
             <div class="news-date">
-                <%= "2019年12月12日" %>
+                <%= anew.created_at.strftime("%Y年%m月%d日") %>
             </div>
             <div class="news-content">
-                <%= "Todo: ここに内容を入力" %>
+                <%= anew.content %>
             </div>
         </div>
         <% end %>

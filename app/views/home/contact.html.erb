@@ -6,7 +6,7 @@
             <p>メールアドレス</p>
         </div>
         <div class="green-form-box2">
-            <input type="email" name="email" style="width:100%">
+            <input type="email" name="email" value="<%= @email %>"style="width:100%">
         </div>
     </div>
         <div class="green-form-box1">
@@ -21,8 +21,7 @@
         <div class="green-form-box6">
             <p>内容</p>
         </div>
-        <textarea name="content">
-        </textarea>
+        <textarea name="content"></textarea>
     </div>
     <input type="submit" value="送信">
     <% end %>
