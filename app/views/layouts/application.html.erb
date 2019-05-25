@@ -22,7 +22,15 @@
            <li>
                <div class="header-menu-border"></div>
            </li>
-           <% if false %>
+           <% if true %>
+              <li>
+               <%= link_to("/mypage") do %>
+               <%= image_tag("UserImage.png") %>
+               <% end %>
+            </li>
+            <li>
+               <%= link_to("ログアウト", "/logout", method: "post") %>
+           </li>
            <% else %>
            <li>
                <%= link_to("ログイン", "/login") %>

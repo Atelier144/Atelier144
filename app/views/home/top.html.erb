@@ -1,11 +1,38 @@
-<section>
-    
+<section id="top-section">
+    <div class="top-background">
+        
+    </div>
 </section>
 <section id="news-section">
     <h2>更新情報</h2>
+    <div class="news-container">
+        <% for i in 1..5 %>
+        <div class="news-record">
+            <div class="news-date">
+                <%= "2019年12月12日" %>
+            </div>
+            <div class="news-content">
+                <%= "Todo: ここに内容を入力" %>
+            </div>
+        </div>
+        <% end %>
+    </div>
 </section>
 <section id="games-section">
-    <h2>最新ゲーム集</h2>
+    <h2>最新ブラウザゲーム集</h2>
+    <table class="table-games">
+        <tr>
+            <td>
+                <%= link_to("/games/infinite_blocks") do %>
+                <div class="table-games-title">Infinite Blocks</div>
+                <%= image_tag("GameThumbnail.png") %>
+                <div class="table-games-genre">ジャンル：ブロック崩し</div>
+                <div class="table-games-description">総ステージ30、ブロックの種類は20種類以上、アイテムの種類も20種類以上、
+                10種類以上の機械、このゲームはボールが無くなるまでは終わらない。</div>
+                <% end %>
+            </td>
+        </tr>
+    </table>
 </section>
 <section id="applications-section">
     <h2>最新アプリ集</h2>

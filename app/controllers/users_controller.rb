@@ -6,6 +6,9 @@ class UsersController < ApplicationController
 
   end
 
+  def mypage
+    
+  end
   def login
 
   end

@@ -1,0 +1,63 @@
+<h1>マイページ</h1>
+<section>
+    <h2>ユーザー情報更新</h2>
+    <%= form_tag("/mypage/renewal", class: "green-form") do %>
+    <div class="green-form-box3">
+        <div class="green-form-box2">
+            <p>ユーザーネーム</p>
+            <input type="text" name="username" style="width:480px">
+        </div>
+    </div>
+    <div class="green-form-box1">
+        <div class="green-form-box2">
+            <p>ユーザー画像</p>
+        </div>
+    </div>
+    <div class="green-form-box1">
+        <div class="green-form-box2">
+            <p>メールアドレス</p>
+            <input type="email" name="current-email" style="width:480px">
+        </div>
+        <div class="green-form-box4">
+            <div class="green-form-note1" style="width:480px">現在のメールアドレス</div>
+        </div>
+        <div class="green-form-box4">
+            <!-- スペース -->
+        </div>
+        <div class="green-form-box2">
+            <input type="email" name="new-email" style="width:480px">
+        </div>
+        <div class="green-form-box4">
+            <div class="green-form-note1"  style="width:480px">新しいメールアドレス</div>
+        </div>
+    </div>
+        <div class="green-form-box1">
+        <div class="green-form-box2">
+            <p>パスワード</p>
+            <input type="email" name="current-password" style="width:480px">
+        </div>
+        <div class="green-form-box4">
+            <div class="green-form-note1" style="width:480px">現在のパスワード</div>
+        </div>
+        <div class="green-form-box4">
+            <!-- スペース -->
+        </div>
+        <div class="green-form-box2">
+            <input type="email" name="new-password" style="width:480px">
+        </div>
+        <div class="green-form-box4">
+            <div class="green-form-note1"  style="width:480px">新しいパスワード（8字以上、32字以下）</div>
+        </div>
+        <div class="green-form-box4">
+            <!-- スペース -->
+        </div>
+        <div class="green-form-box2">
+            <input type="email" name="new-password2" style="width:480px">
+        </div>
+        <div class="green-form-box4">
+            <div class="green-form-note1"  style="width:480px">新しいパスワード（確認のため、再入力してください）</div>
+        </div>
+    </div>
+    <input type="submit" value="更新">
+    <% end %> 
+</section>
