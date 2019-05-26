@@ -2,9 +2,30 @@
 <section>
     <h2>ランキング</h2>
     <ul class="records-buttons">
-        <li class="records-button records-button-active">全体</li>
-        <li class="records-button">年間</li>
-        <li class="records-button">月間</li>
-        <li class="records-button">週間</li>
+        <li id="records-whole" class="records-button records-button-active">全体</li>
+        <li id="records-annual" class="records-button">年間</li>
+        <li id="records-monthly" class="records-button">月間</li>
+        <li id="records-weekly" class="records-button">週間</li>
     </ul>
+    <div class="records-boards">
+        <div class="infinite-blocks-records records-board records-whole">
+            <div class="infinite-blocks-record">
+                <div class="infinite-blocks-record-rank">50</div>
+                <div class="infinite-blocks-record-userimage"><%= image_tag("UserImage.png") %></div>
+                <div class="infinite-blocks-record-username">とにかく長い名前を入れてみる</div>
+                <div class="infinite-blocks-record-points">142857 pts</div>
+                <div class="infinite-blocks-record-level">Lv. 16</div>
+                <div class="infinite-blocks-record-date">2019年07月01日</div>
+            </div>
+        </div>
+        <div class="infinite-blocks-records records-board records-annual" style="display:none">
+            <p>年間ランキング</p>
+        </div>
+        <div class="infinite-blocks-records records-board records-monthly" style="display:none">
+            <p>月間ランキング</p>
+        </div>
+        <div class="infinite-blocks-records records-board records-weekly" style="display:none">
+            <p>週間ランキング</p>
+        </div>
+    </div>
 </section>

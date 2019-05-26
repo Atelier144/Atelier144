@@ -12,8 +12,6 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
-//= require_tree .
 //= require jquery
 //= require jquery_ujs
 
@@ -23,4 +21,12 @@ $(document).ready(function () {
             "scrollTop": 0
         }, "slow");
     });
+
+    $(".records-button").click(function () {
+        $(".records-button").removeClass("records-button-active");
+        $(this).addClass("records-button-active");
+        var category = $(this).attr("id");
+        $(".records-board").hide();
+        $(".records-boards").children("." + category).fadeIn();
+    })
 });
