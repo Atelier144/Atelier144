@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   get "/games/infinite_blocks", to: "infinite_blocks#home"
   get "/games/infinite_blocks/records", to: "infinite_blocks#records"
+
+  post "/games/infinite_blocks/record", to: "infinite_blocks#record"
 end

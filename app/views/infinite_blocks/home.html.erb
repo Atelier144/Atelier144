@@ -1,4 +1,11 @@
+<%= javascript_include_tag("/UnityBuilds/InfiniteBlocks/UnityLoader") %>
+<%= javascript_include_tag("UnityInfiniteBlocks") %>
+
+
 <h1>InfiniteBlocks</h1>
 <section>
-    <p>ランキングを見るには<%= link_to("こちら", "/games/infinite_blocks/records") %>をクリック</p>
+  <div class="game-container-1024x768">
+    <div id="gameContainer" style="width: 1024px; height: 768px; margin: auto"></div>
+  </div>
+  <p>ランキングを見るには<%= link_to("こちら", "/games/infinite_blocks/records") %>をクリック</p>
 </section>

@@ -30,3 +30,54 @@ $(document).ready(function () {
         $(".records-boards").children("." + category).fadeIn();
     })
 });
+
+function GetUserIdFromUnity() {
+    return 0;
+}
+
+function GetLanguageFromUnity() {
+    return "Japanese";
+}
+
+function SendInfiniteBlocksRecordFromUnity(userId, score, level) {
+    $.ajax({
+        url: "/games/infinite_blocks/record",
+        type: "POST",
+        data: {
+            user_id: userId,
+            score: score,
+            level: level
+        },
+        dataType: "html",
+        success: function (data) {
+            alert("SUCCESSED");
+        },
+        error: function (data) {
+            alert("FAILED");
+        }
+    });
+}
+
+function GetInfiniteBlocksHighScoreFromUnity() {
+    return 0;
+}
+
+function SetInfiniteBlocksHighScoreFromUnity(highScore) {
+    alert("うまくいけ！");
+}
+
+function DestroyInfiniteBlocksHighScoreFromUnity() {
+
+}
+
+function GetInfiniteBlocksMaxLevelFromUnity() {
+    return 0;
+}
+
+function SetInfiniteBlocksMaxLevelFromUnity(maxLevel) {
+
+}
+
+function DestroyInfiniteBlocksMaxLevelFromUnity() {
+
+}
