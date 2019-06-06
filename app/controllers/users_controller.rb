@@ -43,6 +43,7 @@ class UsersController < ApplicationController
     if params[:agreement] == "agree"
       if params[:password] == params[:password2] && params[:password]
         if @user.save
+          SignupMailer.confirm(@user).deliver_now
           redirect_to("/")
         else
           @error_message = "ユーザー登録に失敗しました"
