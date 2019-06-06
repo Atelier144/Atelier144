@@ -4,6 +4,6 @@ class InfiniteBlocksRecord < ApplicationRecord
     validates :level, numericality:{greater_than: 0, less_than_or_equal_to: 30}
 
     def user
-        return User.find_by(id: this.user_id)
+        return User.find_by(id: self.user_id)
     end
 end

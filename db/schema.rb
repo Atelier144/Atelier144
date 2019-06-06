@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_25_073427) do
+ActiveRecord::Schema.define(version: 2019_05_28_103724) do
 
   create_table "infinite_blocks_records", force: :cascade do |t|
     t.integer "user_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_05_25_073427) do
     t.boolean "is_certificated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_name"
   end
 
 end

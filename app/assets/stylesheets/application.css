@@ -428,6 +428,12 @@ footer {
     background-color: #BFFF00;
 }
 
+.green-form input[type="file"] {
+    position: absolute;
+    top: 0px;
+    left: 260px;
+}
+
 .green-form textarea {
     width: 100%;
     min-height: 300px;
@@ -482,6 +488,13 @@ footer {
     position: relative;
 }
 
+.green-form-box7 {
+    height: 260px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
 .green-form-note1 {
     margin: 0px;
     padding: 0px;
@@ -498,6 +511,15 @@ footer {
     color: #408000;
     position: relative;
     bottom: 3px;
+}
+
+.green-form-userimage {
+    width: 160px;
+    height: 160px;
+    border-radius: 80px;
+    position: absolute;
+    top: 0px;
+    left: 260px;
 }
 
 /*------------------------------RECORDS BUTTONS------------------------------*/
@@ -611,7 +633,7 @@ footer {
     width: 180px;
     height: 60px;
     line-height: 60px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 100;
     color: black;
     position: absolute;

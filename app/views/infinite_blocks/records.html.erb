@@ -9,14 +9,16 @@
     </ul>
     <div class="records-boards">
         <div class="infinite-blocks-records records-board records-whole">
+           <% @whole_records.each do |record| %>
             <div class="infinite-blocks-record">
-                <div class="infinite-blocks-record-rank">50</div>
-                <div class="infinite-blocks-record-userimage"><%= image_tag("UserImage.png") %></div>
-                <div class="infinite-blocks-record-username">とにかく長い名前を入れてみる</div>
-                <div class="infinite-blocks-record-points">142857 pts</div>
-                <div class="infinite-blocks-record-level">Lv. 16</div>
+                <div class="infinite-blocks-record-rank">1</div>
+                <div class="infinite-blocks-record-userimage"><%= image_tag(record.user.get_image_name) %></div>
+                <div class="infinite-blocks-record-username"><%= record.user.name %></div>
+                <div class="infinite-blocks-record-points"><%= record.score %> pts</div>
+                <div class="infinite-blocks-record-level">Lv. <%= record.level%></div>
                 <div class="infinite-blocks-record-date">2019年07月01日</div>
             </div>
+            <% end %>
         </div>
         <div class="infinite-blocks-records records-board records-annual" style="display:none">
             <p>年間ランキング</p>

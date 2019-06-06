@@ -3,6 +3,7 @@ class InfiniteBlocksController < ApplicationController
   end
 
   def records
+    @whole_records = InfiniteBlocksRecord.all.order(score: :desc).order(level: :desc).order(created_at: :desc)
   end
 
   def record

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/contact", to: "home#contact"
 
   get "/mypage", to: "users#mypage"
+  post "/mypage/update/:id", to: "users#update"
   get "/users/:id", to: "users#show"
   get "/login" , to: "users#login_form"
   post "/login", to: "users#login"

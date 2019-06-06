@@ -50,10 +50,10 @@ function SendInfiniteBlocksRecordFromUnity(userId, score, level) {
         },
         dataType: "html",
         success: function (data) {
-            alert("SUCCESSED");
+            console.log("SUCCESS");
         },
         error: function (data) {
-            alert("FAILED");
+            console.log("FAILED");
         }
     });
 }

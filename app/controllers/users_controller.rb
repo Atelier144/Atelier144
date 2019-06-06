@@ -6,6 +6,17 @@ class UsersController < ApplicationController
 
   end
 
+  def update
+    @user = User.find_by(id: params[:id])
+    @user.image_name = params[:image]
+    if @user.save
+      redirect_to("/mypage")
+    else
+      redirect_to("/")
+    end
+    
+  end
+
   def login_form
 
   end
@@ -30,7 +41,7 @@ class UsersController < ApplicationController
   def signup
     @user = User.new(name: params[:name], email: params[:email], password: params[:password], is_certificated: true)
     if params[:agreement] == "agree"
-      if params[:password] == params[:password2]
+      if params[:password] == params[:password2] && params[:password]
         if @user.save
           redirect_to("/")
         else
