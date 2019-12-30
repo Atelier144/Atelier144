@@ -17,6 +17,13 @@ Rails.application.routes.draw do
   get "/signup", to: "users#signup_form"
   post "/signup", to: "users#signup"
 
+  get "/login/forgot_password", to: "users#forgot_password_form"
+  post "/login/forgot_password", to: "users#forgot_password"
+  get "/login/forgot_password/certificated", to: "users#certificated_forgot_password"
+
+  get "/new_password/:hash", to: "users#new_password_form"
+  post "/new_password/:hash", to: "users#new_password"
+
   post "/signup/username_confirmation", to: "users#signup_username_confirmation"
   post "/signup/email_confirmation", to: "users#signup_email_confirmation"
 

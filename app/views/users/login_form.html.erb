@@ -3,7 +3,7 @@
     <%= form_tag("/login",class: "form-alpha") do %>
     <input type="email" name="email" placeholder="メールアドレス">
     <input type="password" name="password" placeholder="パスワード" style="margin-top:20px">
-    <div class="forgot-password"><%= link_to("パスワードをお忘れですか？", "/")%></div>
+    <div class="forgot-password"><%= link_to("パスワードをお忘れですか？", "/login/forgot_password")%></div>
     <input type="submit" value="ログイン" style="margin-top:20px">
     <h4 style="margin-top:30px">もしくは</h4>
     <%= link_to("/auth/twitter", class:"twitter", style:"margin-top:20px", method: "POST") do %><i class="fab fa-twitter"></i> Twitterでログイン<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_27_140214) do
+ActiveRecord::Schema.define(version: 2019_12_30_141915) do
 
   create_table "infinite_blocks_records", force: :cascade do |t|
     t.integer "user_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_12_27_140214) do
     t.boolean "is_published_introduction"
     t.boolean "is_published_web_site"
     t.boolean "is_published_twitter_url"
+    t.string "new_password_hash"
   end
 
 end

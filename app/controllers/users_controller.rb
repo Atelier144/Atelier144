@@ -63,12 +63,43 @@ class UsersController < ApplicationController
     password_confirmation = params[:password_confirmation]
 
     is_genuine = "true"
-
-    if User.find_by(email: email)
+    if email !~ @@email_regexp
       is_genuine = nil
-      flash[:create_email_email_warning] = "このメールアドレスは既に利用されています"
+      flash[:create_email_email_warning] = "メールアドレスを入力してください"
+    elsif User.find_by(email: email)
+      is_genuine = nil
+      flash[:create_email_email_warning] = "そのメールアドレスは既に利用されています"
     else
       flash[:create_email_email] = email
+    end
+
+    if password.length < 8 || password.length > 32
+      is_genuine = nil
+      flash[:create_email_password_warning] = "8字以上、32字以下のパスワードを入力してください"
+    else
+      flash[:create_email_password] = password
+    end
+
+    if password != password_confirmation
+      is_genuine = nil
+      flash[:create_email_password_confirmation_warning] = "もう一度入力してください"
+    else
+      flash[:create_email_password_confirmation] = password_confirmation
+    end
+
+    if is_genuine
+      user = User.find_by(id: @current_user.id)
+      user.email = email
+      user.password = password
+      user.password_confirmation = password_confirmation
+      if user.save
+        redirect_to("/settings/email")
+      else
+        flash[:notice] = "メールアドレスおよびパスワードの登録に失敗しました"
+        redirect_to("/settings/email")
+      end
+    else
+      redirect_to("/settings/email")
     end
 
   end
@@ -160,6 +191,92 @@ class UsersController < ApplicationController
     render json: user
   end
 
+  def forgot_password_form
+
+  end
+
+  def forgot_password
+    user = User.find_by(email: params[:email])
+    hash = ""
+    if user
+      loop do
+        hash = generate_random_code(16)
+        break if User.find_by(new_password_hash: hash).nil?
+      end
+      user.new_password_hash = hash
+      if user.save
+        NewPasswordMailer.send_mail(user).deliver
+        redirect_to("/login/forgot_password/certificated")
+      else
+        redirect_to("/login/forgot_password")
+      end
+    else
+      redirect_to("/login/forgot_password")
+    end
+  end
+
+  def certificated_forgot_password
+
+  end
+
+  def generate_random_code(num)
+    retval = ""
+    for i in 1..num
+      code = rand(36).to_s(36)
+      retval += code
+    end
+    return retval
+  end
+
+  def new_password_form
+    user = User.find_by(new_password_hash: params[:hash])
+    if user.nil?
+      flash[:notice] = "権限がありません"
+      redirect_to("/")
+    end
+  end
+
+  def new_password
+    user = User.find_by(new_password_hash: params[:hash])
+    password = params[:password]
+    password_confirmation = params[:password_confirmation]
+    is_genuine = "true"
+
+    if user
+      if password.length < 8 || password.length > 32
+        is_genuine = nil
+        flash[:password_warning] = "8字以上、32字以下のパスワードを入力してください"
+      else
+        flash[:password] = password
+      end
+
+      if password != password_confirmation
+        is_genuine = nil
+        flash[:password_confirmation_warning] = "もう一度入力してください"
+      else
+        flash[:password_confirmation] = password_confirmation
+      end
+
+      if is_genuine
+        user.password = password
+        user.password_confirmation = password_confirmation
+        user.new_password_hash = nil
+        if user.save
+          session[:user_id] = user.id
+          redirect_to("/")
+        else
+          flash[:notice] = "パスワードの再設定に失敗しました"
+          redirect_to("/")
+        end
+      else
+        redirect_to("/new_password/#{params[:hash]}")
+      end
+    else
+      flash[:notice] = "権限がありません"
+      redirect_to("/")
+    end
+  end
+
   def twitter
     begin
       auth_hash = request.env["omniauth.auth"]
@@ -182,21 +299,28 @@ class UsersController < ApplicationController
 
   def twitter_post
     if params[:provider] == "twitter"
-      user = User.find_by(twitter_uid: params[:uid])
-      if user
+      found_user = User.find_by(twitter_uid: params[:uid])
+      if found_user
         if session[:user_id]
           puts "Twitter Connection Error"
           flash[:twitter_connection_error] = "このTwitterアカウントは既に使用されています"
           redirect_to("/settings/social")
         else
           puts "Twitter Login"
-          session[:user_id] = user.id
+          session[:user_id] = found_user.id
           redirect_to("/")
         end
       else
         if session[:user_id]
           puts "Twitter Connection"
-          redirect_to("/settings/social")
+          user = User.find_by(id: session[:user_id])
+          user.twitter_uid = params[:uid]
+          if user.save
+            redirect_to("/settings/social")
+          else
+            flash[:notice] = "Twitterとの連携に失敗しました"
+            redirect_to("/settings/social")
+          end
         else
           puts "Twitter Signup"
           password = SecureRandom.base64(30)
@@ -229,16 +353,15 @@ class UsersController < ApplicationController
   end
 
   def disconnect_twitter
-    @user = @current_user
-    if @user.email
-      @user.twitter_uid = nil
-      if @user.save
+    user = @current_user
+    if user.email
+      user.twitter_uid = nil
+      if user.save
         redirect_to("/settings/social")
       else
         flash[:notice] = " Twitter連携解除に失敗しました"
         redirect_to("/settings/social")
       end
-      redirect_to("/settings/social")
     else
       flash[:notice] = "メールアドレスが登録されていません"
       redirect_to("/settings/social")

@@ -4,6 +4,7 @@ class User < ApplicationRecord
     validates :name, uniqueness: true, presence: true
     validates :email, uniqueness: true, allow_nil: true
     validates :twitter_uid, uniqueness: true, allow_nil: true
+    validates :new_password_hash, uniqueness: true, allow_nil: true
 
     has_secure_password
 
@@ -24,3 +25,4 @@ end
 # :twitter_uid :string
 # :twitter_url :string
 # :is_published_twitter_url :boolean
+# :new_password_hash :string

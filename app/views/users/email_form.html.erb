@@ -18,7 +18,8 @@
 </ul>
 
 <% if @current_user.email %>
-<%= form_tag("/login", class: "form-beta") do %>
+
+<%= form_tag("/settings/email", class: "form-beta") do %>
 <h3>メールアドレス設定</h3>
 <h5>現在のメールアドレス</h5>
 <input type="email" name="current-email">
@@ -26,18 +27,34 @@
 <input type="email" name="new-email">
 <input type="submit" value="更新" style="margin-top:40px">
 <% end %>
+
 <% else %>
-<%= form_tag("/login", class: "form-beta") do %>
+
+<%= form_tag("/settings/email/create", class: "form-beta") do %>
 <h3>メールアドレス設定</h3>
 <div class="email-notice">このアカウントにはメールアドレスが登録されていません</div>
 <div class="email-notice-description">メールアドレスおよびパスワードの登録を行ってください。<br>また登録後、メールアドレスでのログインおよびSNSとの連携解除ができるようになります。</div>
 <hr style="margin-top:20px">
+
 <h5 style="margin-top:20px">メールアドレス</h5>
-<input type="email" name="email">
+<input type="email" name="email" value="<%= flash[:create_email_email] %>">
+<% if flash[:create_email_email_warning] %>
+<div class="confirmation-message warning"><%= flash[:create_email_email_warning] %></div>
+<% end %>
+
 <h5 style="margin-top:20px">パスワード（8字以上、32字以下）</h5>
-<input type="password" name="password">
+<input type="password" name="password" value="<%= flash[:create_email_password] %>">
+<% if flash[:create_email_password_warning] %>
+<div class="confirmation-message warning"><%= flash[:create_email_password_warning] %></div>
+<% end %>
+
 <h5 style="margin-top:20px">パスワード（再入力）</h5>
-<input type="password" name="password_comfirmation">
+<input type="password" name="password_confirmation" value="<%= flash[:create_email_password_confirmation] %>">
+<% if flash[:create_email_password_confirmation_warning] %>
+<div class="confirmation-message warning"><%= flash[:create_email_password_confirmation_warning] %></div>
+<% end %>
+
 <input type="submit" value="登録" style="margin-top:40px">
 <% end %>
+
 <% end %>
