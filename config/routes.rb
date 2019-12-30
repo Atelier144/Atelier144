@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get "/news", to: "home#news"
   get "/terms", to: "home#terms"
   get "/privacy", to: "home#privacy"
-  get "/contact", to: "home#contact"
+
+  get "/contact", to: "home#contact_form"
+  post "/contact", to: "home#contact"
+  get "/contact/certificated", to: "home#certificated_contact"
 
   get "/profiles/:id", to: "users#show"
 

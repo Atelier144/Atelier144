@@ -1,0 +1,23 @@
+<h1>お問い合わせ</h1>
+<%= form_tag("/contact", class: "form-beta") do %>
+
+<h5>メールアドレス</h5>
+<input type="email" name="email" value="<%= @email %>">
+<% if flash[:email_warning] %>
+<div class="confirmation-message warning"><%= flash[:email_warning] %></div>
+<% end %>
+
+<h5 style="margin-top:20px">件名</h5>
+<input type="text" name="title" value="<%= flash[:title] %>">
+<% if flash[:title_warning] %>
+<div class="confirmation-message warning"><%= flash[:title_warning] %></div>
+<% end %>
+
+<h5 style="margin-top:20px">メッセージ内容</h5>
+<textarea name="content" style="height:300px"><%= flash[:content] %></textarea>
+<% if flash[:content_warning] %>
+<div class="confirmation-message warning"><%= flash[:content_warning] %></div>
+<% end %>
+
+<input type="submit" value="送信" style="margin-top:40px">
+<% end %>
