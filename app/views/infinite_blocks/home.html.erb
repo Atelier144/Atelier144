@@ -2,10 +2,19 @@
 <%= javascript_include_tag("UnityInfiniteBlocks") %>
 
 
-<h1>InfiniteBlocks</h1>
+<h1>Infinite Blocks</h1>
 <section>
-  <div class="game-container-1024x768">
-    <div id="gameContainer" style="width: 1024px; height: 768px; margin: auto"></div>
-  </div>
-  <p>ランキングを見るには<%= link_to("こちら", "/games/infinite_blocks/records") %>をクリック</p>
+    <div class="game-container" style="width: 1024px; height: 768px">
+        <div id="gameContainer" style="width: 1024px; height: 768px; margin: auto"></div>
+    </div>
+    <div class="game-container-notice">
+        <p>ブラウザの横幅を1080px以上にしてください。</p>
+    </div>
+    <p>ランキングを見るには<%= link_to("こちら", "/games/infinite_blocks/records") %>をクリック</p>
 </section>
+<h2>遊び方</h2>
+<h2>問題報告</h2>
+<h2>スクリーンショット</h2>
+<h2>素材提供</h2>
+<div id="unity-user-id"><%= @user_id %></div>
+<div id="unity-language-code">1</div>

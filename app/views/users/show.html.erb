@@ -1,2 +1,23 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>プロフィール</h1>
+<div class="profile-box">
+    <%= image_tag(@user.image_name.url, class: "user-image") %>
+    <div class="username"><%= @user.name %></div>
+    <hr>
+    <div class="introduction"><%= @user.introduction %></div>
+    <hr>
+    <div class="urls">
+        <h5><i class="fas fa-home"></i> ホームページ</h5>
+        <a href="#">https://www.atelier144.com</a>
+        <h5 style="margin-top:30px"><i class="fab fa-twitter"></i> Twitterアカウント</h5>
+        <a href="#">https://twitter.com/AkioMabuchi</a>
+    </div>
+    <hr>
+    <div class="whole-records">
+        <h4>ブラウザゲームの記録</h4>
+        <div class="records">
+            <h6>Infinite Blocks</h6>
+        </div>
+        <h4>モバイルゲームの記録</h4>
+        <div class="preparation">準備中</div>
+    </div>
+</div>

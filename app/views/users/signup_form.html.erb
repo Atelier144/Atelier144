@@ -1,47 +1,32 @@
-<section>
-    <h1>新規登録</h1>
-    <%= form_tag("/signup", class: "green-form") do %>
-    <div class="green-form-box3">
-        <div class="green-form-box2">
-            <p>ユーザーネーム</p>
-            <input type="text" name="name" style="width:480px">
-        </div>
-    </div>
-    <div class="green-form-box1">
-        <div class="green-form-box2">
-            <p>メールアドレス</p>
-            <input type="email" name="email" style="width:480px">
-        </div>
-    </div>
-    <div class="green-form-box1">
-        <div class="green-form-box2">
-            <p>パスワード</p>
-            <input type="password" name="password" style="width:480px">
-        </div>
-        <div class="green-form-box4">
-            <div class="green-form-note1" style="width:480px">8字以上、32字以下</div>
-        </div>
-        <div class="green-form-box4">
-            <!-- スペース -->
-        </div>
-        <div class="green-form-box2">
-            <input type="password" name="password2" style="width:480px">
-        </div>
-        <div class="green-form-box4">
-            <div class="green-form-note1"  style="width:480px">確認のため、再入力してください</div>
-        </div>
-    </div>
-    <div class="green-form-box1">
-        <div class="green-form-box2">
-            <p>利用規約に</p>
-            <div class="green-form-box5" style="width:160px; right:320px">
-                <input type="radio" name="agreement" value="agree"><span class="green-form-note2">同意します</span>
-            </div>
-            <div class="green-form-box5" style="width:160px; right:160px">
-                <input type="radio" name="agreement" value="disagree" checked><span class="green-form-note2">同意しません</span>
-            </div>
-        </div>
-    </div>
-    <input type="submit" value="登録">
-    <% end %>
-</section>
+<h1>新規登録</h1>
+<%= form_tag("/signup" , class: "form-alpha") do %>
+<h3>はじめに</h3>
+<div class="notice" style="margin-top:20px;">まず<%= link_to("利用規約","/terms")%>および<%= link_to("プライバシーポリシー","/privacy")%>をお読みください。</div>
+<hr style="margin-top:20px">
+
+<input id="js-signup-form-username" type="text" name="username" value="<%= flash[:signup_username] %>" placeholder="ユーザーネーム" style="margin-top:20px">
+<% if flash[:signup_username_warning] %>
+<div id="js-signup-message-username" class="confirmation-message warning"><%= flash[:signup_username_warning] %></div>
+<% end %>
+
+<input id="js-signup-form-email" type="email" name="email" value="<%= flash[:signup_email] %>" placeholder="メールアドレス" style="margin-top:20px">
+<% if flash[:signup_email_warning] %>
+<div id="js-signup-message-email" class="confirmation-message warning"><%= flash[:signup_email_warning] %></div>
+<% end %>
+
+<input id="js-signup-form-password" type="password" name="password" value="<%= flash[:signup_password] %>" placeholder="パスワード（8字以上、32字以下）" style="margin-top:20px">
+<% if flash[:signup_password_warning] %>
+<div id="js-signup-message-password" class="confirmation-message warning"><%= flash[:signup_password_warning] %></div>
+<% end %>
+
+<input id="js-signup-form-password-confirmation" type="password" name="password_confirmation" value="<%= flash[:signup_password_confirmation] %>" placeholder="パスワード（再入力）" style="margin-top:20px">
+<% if flash[:signup_password_confirmation_warning] %>
+<div id="js-signup-message-password-confirmation" class="confirmation-message warning"><%= flash[:signup_password_confirmation_warning] %></div>
+<% end %>
+
+<input id="js-signup-submit" type="submit" value="新規登録" style="margin-top:20px">
+<h4 style="margin-top:30px">もしくは</h4>
+<%= link_to("/auth/twitter", class:"twitter", style:"margin-top:20px", method: "POST") do %><i class="fab fa-twitter"></i> Twitterで新規登録<% end %>
+<hr style="margin-top:40px">
+<div class="notice" style="margin-top:20px">すでにアカウントをお持ちの方は<%= link_to("こちら", "/login")%>よりログインをお願いします。</div>
+<% end %>

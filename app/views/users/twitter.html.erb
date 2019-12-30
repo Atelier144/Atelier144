@@ -1,0 +1,17 @@
+<%= form_tag("/twitter", class: "form-omega") do %>
+<h3>ただいま、Twitterと連携中です。</h3>
+<input type="text" name="provider" value="<%= @provider %>">
+<input type="text" name="uid" value="<%= @uid %>">
+<input type="text" name="name" value="<%= @name %>">
+<input type="text" name="image" value="<%= @image %>">
+<input type="text" name="introduction" value="<%= @introduction %>">
+<input type="text" name="website" value="<%= @website %>">
+<input type="text" name="twitter_url" value="<%= @twitter_url %>">
+<p>自動的に更新されない場合は<input type="submit" value="こちら" id="js-twitter">をクリックしてください</p>
+<% end %>
+<script>
+    window.onload = function() {
+        $("#js-twitter").click();
+    }
+
+</script>

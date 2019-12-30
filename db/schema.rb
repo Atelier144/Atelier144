@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_103724) do
+ActiveRecord::Schema.define(version: 2019_12_27_140214) do
 
   create_table "infinite_blocks_records", force: :cascade do |t|
     t.integer "user_id"
@@ -29,12 +29,17 @@ ActiveRecord::Schema.define(version: 2019_05_28_103724) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "new_email"
     t.string "password_digest"
-    t.boolean "is_certificated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_name"
+    t.string "introduction"
+    t.string "web_site"
+    t.string "twitter_uid"
+    t.string "twitter_url"
+    t.boolean "is_published_introduction"
+    t.boolean "is_published_web_site"
+    t.boolean "is_published_twitter_url"
   end
 
 end

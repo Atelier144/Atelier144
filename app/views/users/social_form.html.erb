@@ -1,0 +1,51 @@
+<h1>アカウント設定</h1>
+<ul class="setting-menu">
+    <li>
+        <%= link_to("プロフィール設定", "/settings/profile") %>
+    </li>
+    <li>
+        <%= link_to("パスワード設定", "/settings/password") %>
+    </li>
+    <li>
+        <%= link_to("メールアドレス設定", "/settings/email") %>
+    </li>
+    <li>
+        <%= link_to("SNS設定", "/settings/social") %>
+    </li>
+    <li>
+        <%= link_to("レコード設定", "/settings/records") %>
+    </li>
+</ul>
+<% if @current_user.twitter_uid.nil? %>
+<div class="form-beta">
+    <h3>SNS設定</h3>
+    <% if flash[:twitter_connection_error] %>
+    <div class="social-warning"><%= flash[:twitter_connection_error] %></div>
+    <% end %>
+    <%= link_to("/auth/twitter", class:"twitter", style:"margin-top:30px", method: "POST") do %>
+    <i class="fab fa-twitter"></i> Twitterと連携する
+    <% end %>
+</div>
+<% elsif @current_user.email %>
+<div class="form-beta">
+    <h3>SNS設定</h3>
+    <div class="social-notice">このアカウントはTwitterと連携済みです</div>
+    <%= link_to("/settings/social/disconnect_twitter", class:"disconnect-twitter", style:"margin-top:20px", method: "POST") do %>
+    <i class="fab fa-twitter"></i> Twitterとの連携を解除する
+    <% end %>
+</div>
+<% else %>
+<div class="form-beta">
+    <h3>SNS設定</h3>
+    <div class="social-notice">このアカウントはTwitterと連携済みです</div>
+    <div class="disabled-button" style="margin-top:20px">
+        <i class="fab fa-twitter"></i> Twitterとの連携を解除する
+    </div>
+    <hr style="margin-top:40px">
+    <div class="email-notice">このアカウントにはメールアドレスが登録されていません</div>
+    <div class="email-notice-description">
+        Twitterとの連携を解除するために、<%= link_to("メールアドレス設定" , "/settings/email") %>にて、メールアドレスおよびパスワードの登録を行ってください。
+        また登録後、メールアドレスでのログインが可能となります。
+    </div>
+</div>
+<% end %>

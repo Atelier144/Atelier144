@@ -1,52 +1,19 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="ja">
+
+<head>
     <title>Atelier144</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
-   <header>
-       <%= link_to("", "/", class: "header-logo") %>
-       <ul class="header-menu">
-           <li>
-               <%= link_to("ブラウザゲーム集","/games") %>
-           </li>
-           <li>
-               <%= link_to("アプリ集","/apps") %>
-           </li>
-           <li>
-               <div class="header-menu-border"></div>
-           </li>
-           <% if @current_user %>
-              <li>
-               <%= link_to("/mypage") do %>
-               <%= image_tag(@current_user.get_image_name) %>
-               <% end %>
-            </li>
-            <li>
-               <%= link_to("ログアウト", "/logout", method: "post") %>
-           </li>
-           <% else %>
-           <li>
-               <%= link_to("ログイン", "/login") %>
-           </li>
-           <li>
-               <%= link_to("新規登録", "/signup") %>
-           </li>
-           <% end %>
-       </ul>
-   </header>
-    <%= yield %>
-    <footer>
-        <ul class="footer-menu">
-            <li>
-                <%= link_to("ホーム", "/") %>
-            </li>
+<body>
+    <header>
+        <%= link_to("", "/", class: "logo") %>
+        <ul class="menu">
             <li>
                 <%= link_to("ブラウザゲーム集", "/games") %>
             </li>
@@ -54,27 +21,112 @@
                 <%= link_to("アプリ集", "/apps") %>
             </li>
             <li>
-                <%= link_to("更新情報", "/news") %>
+                <div class="separate"></div>
+            </li>
+            <% if @current_user %>
+            <li>
+                <div class="user-image">
+                    <%= image_tag(@current_user.image_name.url) %>
+                </div>
+            </li>
+            <% else %>
+            <li>
+                <%= link_to("ログイン", "/login") %>
             </li>
             <li>
-                <%= link_to("利用規約", "/terms") %>
+                <%= link_to("新規登録", "/signup") %>
+            </li>
+            <% end %>
+        </ul>
+        <div class="hamburger"></div>
+        <% if @current_user %>
+        <div class="popup-menu">
+            <div class="close"></div>
+            <%= image_tag(@current_user.image_name.url) %>
+            <p><%= @current_user.name %></p>
+            <ul>
+                <li>
+                    <%= link_to("/profiles/#{@current_user.id}") do %><i class="far fah fa-id-card"></i>プロフィール<% end %>
+                </li>
+                <li>
+                    <%= link_to("/settings/profile") do %><i class="fas fah fa-user-cog"></i>アカウント設定<% end %>
+                </li>
+                <li>
+                    <%= link_to("/logout", method: "POST") do %><i class="fas fah fa-sign-out-alt"></i>ログアウト<% end %>
+                </li>
+            </ul>
+        </div>
+        <% end %>
+        <div class="pulldown-menu">
+            <ul>
+                <li>
+                    <%= link_to("アプリ集","/apps")%>
+                </li>
+            </ul>
+            <div class="user-information">
+                <% if @current_user %>
+                <div class="user">
+                    <%= image_tag(@current_user.image_name.url)%>
+                    <p><%= @current_user.name %></p>
+                </div>
+                <ul>
+                    <li>
+                        <%= link_to("/profiles/#{@current_user.id}") do %><i class="far fah fa-id-card"></i>プロフィール<% end %>
+                    </li>
+                    <li>
+                        <%= link_to("/settings/profile") do %><i class="fas fah fa-user-cog"></i>アカウント設定<% end %>
+                    </li>
+                    <li>
+                        <%= link_to("/logout", method: "POST") do %><i class="fas fah fa-sign-out-alt"></i>ログアウト<% end %>
+                    </li>
+                </ul>
+                <% else %>
+                <ul>
+                    <li>
+                        <%= link_to("ログイン", "/login")%>
+                    </li>
+                    <li>
+                        <%= link_to("新規登録", "/signup")%>
+                    </li>
+                </ul>
+                <% end %>
+            </div>
+        </div>
+    </header>
+    <%= yield %>
+    <footer>
+        <ul class="menu">
+            <li>
+                <%= link_to("ホーム","/")%>
             </li>
             <li>
-                <%= link_to("プライバシーポリシー", "/privacy") %>
+                <%= link_to("ブラウザゲーム集","/games")%>
             </li>
             <li>
-                <%= link_to("お問い合わせ", "/contact") %>
+                <%= link_to("アプリ集","/apps")%>
+            </li>
+            <li>
+                <%= link_to("更新情報","/news")%>
+            </li>
+            <li>
+                <%= link_to("利用規約","/terms")%>
+            </li>
+            <li>
+                <%= link_to("プライバシーポリシー","/privacy")%>
+            </li>
+            <li>
+                <%= link_to("お問い合わせ","/contact")%>
             </li>
         </ul>
-        <p class="footer-sns-headline">公式SNS</p>
-        <ul class="footer-menu-sns">
-            <li>
-                <a href="/"><%= image_tag("Twitter.png") %></a>
-                <a href="/"><%= image_tag("Facebook.png") %></a>
-            </li>
-        </ul>
-        <p class="footer-copyright">Copyright(C) 2019 Atelier144 All Rights Reserved.</p>
+        <h5>公式Twitter</h5>
+        <a href="#" class="twitter"></a>
+        <div class="copyrights">Copyright <i class="far fa-copyright"></i> 2020 Atelier144 All Rights Reserved.</div>
     </footer>
-    <div class="pagetop"></div>
-  </body>
+    <% if flash[:notice] %>
+    <div class="flash">
+        <%= flash[:notice] %>
+    </div>
+    <% end %>
+</body>
+
 </html>

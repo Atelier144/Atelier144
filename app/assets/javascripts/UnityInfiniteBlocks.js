@@ -1,1 +1,1 @@
-var gameInstance = UnityLoader.instantiate("gameContainer", "/UnityBuilds/InfiniteBlocks/InfiniteBlocksJSTest.json");
+var gameInstance = UnityLoader.instantiate("gameContainer", "/UnityBuilds/InfiniteBlocks/InfiniteBlocks.json");

@@ -1,0 +1,55 @@
+<h1>アカウント設定</h1>
+<ul class="setting-menu">
+    <li>
+        <%= link_to("プロフィール設定", "/settings/profile") %>
+    </li>
+    <li>
+        <%= link_to("パスワード設定", "/settings/password") %>
+    </li>
+    <li>
+        <%= link_to("メールアドレス設定", "/settings/email") %>
+    </li>
+    <li>
+        <%= link_to("SNS設定", "/settings/social") %>
+    </li>
+    <li>
+        <%= link_to("レコード設定", "/settings/records") %>
+    </li>
+</ul>
+<%= form_tag("/settings/profile", class:"form-beta", multipart: true) do %>
+<h3>プロフィール設定</h3>
+<h5>ユーザー画像</h5>
+<div class="setting-image">
+    <div class="notice">
+        <h6>
+            使用可能ファイル
+        </h6>
+        <p>
+            2MB以内のgif、png、jpgファイル（推奨サイズ：400x400）
+        </p>
+    </div>
+    <%= image_tag(@current_user.image_name.url,id:"js-setting-image-image") %>
+    <input type="file" name="image" id="js-setting-image-file">
+    <input type="checkbox" name="is_default" id="js-setting-image-is-default">
+    <div class="select-button" style="top:170px" id="js-setting-image-select">ファイルを選択</div>
+    <div class="select-button" style="top:210px" id="js-setting-image-default">デフォルトに戻す</div>
+    <div class="file-name" id="js-setting-image-name"></div>
+    <div class="file-status status-none" id="js-setting-image-status">未選択</div>
+    <%= image_tag(@current_user.image_name.url, style: "display:none", id: "js-setting-image-current-image") %>
+    <%= image_tag("UserImage.png", style: "display:none", id: "js-setting-image-default-image") %>
+</div>
+<h5>ユーザー名（必須）</h5>
+<input type="text" name="name" value="<%= @current_user.name %>">
+<h5 style="margin-top:25px">自己紹介文</h5>
+<textarea name="introduction" style="height:300px"></textarea>
+<h5 style="margin-top:25px">ホームページ</h5>
+<input type="url" name="web-site">
+<input type="submit" value="更新" style="margin-top:60px">
+<% end %>
+
+
+<!--
+デフォルトに戻すのボタンをクリックした時「＜デフォルトに戻す＞」を表示し
+ファイル選択及び「デフォルトに戻すのボタン」を押した時に「未選択」に変更する
+ファイル名が「＜デフォルトに戻す＞」になったとき、Rubyにて画像を変更する
+-->
