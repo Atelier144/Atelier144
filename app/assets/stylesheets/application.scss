@@ -1118,6 +1118,44 @@ footer {
     .confirmation-message.warning {
         color: red;
     }
+
+    ul.published-list {
+        list-style: none;
+
+        li {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            height: 20px;
+
+            .div-checkbox {
+                display: inline-block;
+                width: 50px;
+                height: 20px;
+                line-height: 20px;
+                font-size: 12px;
+                font-weight: 200;
+                letter-spacing: 1px;
+                text-align: center;
+                border: 1px solid #BFBFBF;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .div-checkbox.checked {
+                background-color: #DFFF7F;
+                color: #394C00;
+            }
+
+            p {
+                display: inline-block;
+                margin-left: 5px;
+                height: 20px;
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+        }
+    }
 }
 
 /*------------------------------FORM GAMMA------------------------------*/
@@ -1271,6 +1309,7 @@ footer {
 }
 
 /*------------------------------PROFILE BOX------------------------------*/
+
 .profile-box {
     width: 720px;
     margin: 0px auto 60px;

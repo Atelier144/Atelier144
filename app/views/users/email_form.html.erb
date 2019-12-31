@@ -21,10 +21,19 @@
 
 <%= form_tag("/settings/email", class: "form-beta") do %>
 <h3>メールアドレス設定</h3>
+
 <h5>現在のメールアドレス</h5>
-<input type="email" name="current-email">
+<input type="email" name="current_email" value="<%= flash[:current_email] %>">
+<% if flash[:current_email_warning] %>
+<div class="confirmation-message warning"><%= flash[:current_email_warning] %></div>
+<% end %>
+
 <h5 style="margin-top:20px">新しいメールアドレス</h5>
-<input type="email" name="new-email">
+<input type="email" name="new_email" value="<%= flash[:new_email] %>">
+<% if flash[:new_email_warning] %>
+<div class="confirmation-message warning"><%= flash[:new_email_warning] %></div>
+<% end %>
+
 <input type="submit" value="更新" style="margin-top:40px">
 <% end %>
 

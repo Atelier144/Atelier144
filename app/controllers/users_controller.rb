@@ -1,8 +1,7 @@
-require "secureRandom"
-
 class UsersController < ApplicationController
   @@email_regexp = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
-  
+  @@url_regexp = Regexp.new(%r{^(http|https)://})
+
   before_action :forbid_login_user, only:[:login, :login_form, :signup, :signup_form]
   before_action :authenticate_user, only:[:profile_form, :password_form, :email_form, :social_form, :records_form]
 
@@ -30,23 +29,66 @@ class UsersController < ApplicationController
   end
 
   def update_profile
-    @user = @current_user
+    user = @current_user
+    username = params[:username]
+    introduction = params[:introduction]
+    website = params[:website]
+    is_genuine = "true"
 
-    if params[:is_default]
-      puts "DEFAULT IMAGE"
-      @user.remove_image_name!
-    elsif params[:image].present?
-      puts "UPLOAD IMAGE"
-      @user.image_name = params[:image]
-    end
+    puts params[:is_published_profile] == "on"
 
-    if @user.save
-      redirect_to("/settings/profile")
+    if username == ""
+      is_genuine = nil
+      flash[:username_warning] = "ユーザー名を入力してください"
+    elsif User.where.not(id: user.id).find_by(name: username)
+      is_genuine = nil
+      flash[:username] = ""
+      flash[:username_warning] = "そのユーザー名は既に使用されています"
     else
-      flash[:notice] = "プロフィールの更新に失敗しました"
-      redirect_to("/settings/profile")
+      flash[:username] = username
     end
 
+    if introduction.length > 300
+      is_genuine = nil
+      flash[:introduction] = ""
+      flash[:introduction_warning] = "300字以内で記述してください"
+    else
+      flash[:introduction] = introduction
+    end
+
+    if website !~ @@url_regexp && website != ""
+      is_genuine = nil
+      flash[:website] = ""
+      flash[:website_warning] = "そのアドレスは無効です"
+    else
+      flash[:website] = website
+    end
+    
+    if is_genuine
+      if params[:is_default]
+        user.remove_image_name!
+      elsif params[:image].present?
+        user.image_name = params[:image]
+      end
+      user.name = username
+      user.introduction = introduction
+      user.web_site = website == "" ? nil : website
+
+      user.is_published_profile = params[:is_published_profile] == "on"
+      user.is_published_introduction = params[:is_published_introduction] == "on"
+      user.is_published_url = params[:is_published_url] == "on"
+      user.is_published_twitter_url = params[:is_published_twitter_url] == "on"
+      user.is_published_records = params[:is_published_records] == "on"
+
+      if user.save
+        redirect_to("/settings/profile")
+      else
+        flash[:notice] = "プロフィールの更新に失敗しました"
+        redirect_to("/settings/profile")
+      end
+    else
+      redirect_to("/settings/profile")
+    end
   end
 
   def update_password
@@ -54,7 +96,39 @@ class UsersController < ApplicationController
   end
 
   def update_email
+    user = @current_user
+    current_email = params[:current_email]
+    new_email = params[:new_email]
 
+    is_genuine = "true"
+    if current_email != user.email
+      is_genuine = nil
+      flash[:current_email_warning] = "メールアドレスが間違っています"
+    else
+      flash[:current_email] = current_email
+    end
+
+    if new_email !~ @@email_regexp
+      is_genuine = nil
+      flash[:new_email_warning] = "メールアドレスを入力してください"
+    elsif User.where.not(id: user.id).find_by(email: new_email)
+      is_genuine = nil
+      flash[:new_email_warning] = "そのメールアドレスは既に利用されています"
+    else
+      flash[:new_email]
+    end
+
+    if is_genuine
+      user.email = new_email
+      if user.save
+        redirect_to("/settings/email")
+      else
+        flash[:notice] = "メールアドレスの更新に失敗しました"
+        redirect_to("/settings/email")
+      end
+    else
+      redirect_to("/settings/email")
+    end
   end
 
   def create_email #パスワードもだよ！
@@ -219,14 +293,7 @@ class UsersController < ApplicationController
 
   end
 
-  def generate_random_code(num)
-    retval = ""
-    for i in 1..num
-      code = rand(36).to_s(36)
-      retval += code
-    end
-    return retval
-  end
+
 
   def new_password_form
     user = User.find_by(new_password_hash: params[:hash])
@@ -315,6 +382,7 @@ class UsersController < ApplicationController
           puts "Twitter Connection"
           user = User.find_by(id: session[:user_id])
           user.twitter_uid = params[:uid]
+          user.twitter_url = params[:twitter_url]
           if user.save
             redirect_to("/settings/social")
           else
@@ -323,7 +391,7 @@ class UsersController < ApplicationController
           end
         else
           puts "Twitter Signup"
-          password = SecureRandom.base64(30)
+          password = generate_random_code(30)
           new_user = User.new(name: params[:name], twitter_uid: params[:uid], password: password)
           if new_user.save
             session[:user_id] = User.find_by(twitter_uid: params[:uid]).id
@@ -356,6 +424,7 @@ class UsersController < ApplicationController
     user = @current_user
     if user.email
       user.twitter_uid = nil
+      user.twitter_url = nil
       if user.save
         redirect_to("/settings/social")
       else
@@ -371,4 +440,16 @@ class UsersController < ApplicationController
   def disconnect_facebook
 
   end
+
+  private
+
+  def generate_random_code(num)
+    retval = ""
+    for i in 1..num
+      code = rand(36).to_s(36)
+      retval += code
+    end
+    return retval
+  end
+  
 end

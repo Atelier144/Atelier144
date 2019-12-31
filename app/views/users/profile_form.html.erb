@@ -16,8 +16,10 @@
         <%= link_to("レコード設定", "/settings/records") %>
     </li>
 </ul>
+
 <%= form_tag("/settings/profile", class:"form-beta", multipart: true) do %>
 <h3>プロフィール設定</h3>
+
 <h5>ユーザー画像</h5>
 <div class="setting-image">
     <div class="notice">
@@ -38,12 +40,74 @@
     <%= image_tag(@current_user.image_name.url, style: "display:none", id: "js-setting-image-current-image") %>
     <%= image_tag("UserImage.png", style: "display:none", id: "js-setting-image-default-image") %>
 </div>
+
 <h5>ユーザー名（必須）</h5>
-<input type="text" name="name" value="<%= @current_user.name %>">
-<h5 style="margin-top:25px">自己紹介文</h5>
-<textarea name="introduction" style="height:300px"></textarea>
+<input type="text" name="username" value="<%= flash[:username] ? flash[:username] : @current_user.name %>">
+<% if flash[:username_warning] %>
+<div class="confirmation-message warning"><%= flash[:username_warning] %></div>
+<% end %>
+
+<h5 style="margin-top:25px">自己紹介（300字以内）</h5>
+<textarea name="introduction" style="height:300px"><%= flash[:introduction] ? flash[:introduction] : @current_user.introduction %></textarea>
+<% if flash[:introduction_warning] %>
+<div class="confirmation-message warning"><%= flash[:introduction_warning] %></div>
+<% end %>
+
 <h5 style="margin-top:25px">ホームページ</h5>
-<input type="url" name="web-site">
+<input type="url" name="website" value="<%= flash[:website] ? flash[:website] : @current_user.web_site %>">
+<% if flash[:website_warning] %>
+<div class="confirmation-message warning"><%= flash[:website_warning] %></div>
+<% end %>
+
+<h5 style="margin-top:25px">公開設定</h5>
+<ul class="published-list">
+    <li>
+        <div id="js-publishment-checkbox-profile" class="js-div-checkbox div-checkbox">
+            非公開
+        </div>
+        <p>
+            プロフィール
+        </p>
+    </li>
+    <li>
+        <div id="js-publishment-checkbox-introduction" class="js-div-checkbox div-checkbox checked">
+            公開
+        </div>
+        <p>
+            自己紹介
+        </p>
+    </li>
+    <li>
+        <div id="js-publishment-checkbox-url" class="js-div-checkbox div-checkbox">
+            非公開
+        </div>
+        <p>
+            ホームページ
+        </p>
+    </li>
+    <li>
+        <div id="js-publishment-checkbox-twitter_url" class="js-div-checkbox div-checkbox">
+            非公開
+        </div>
+        <p>
+            Twitterアカウント
+        </p>
+    </li>
+    <li>
+        <div id="js-publishment-checkbox-records" class="js-div-checkbox div-checkbox">
+            非公開
+        </div>
+        <p>
+            ランキング
+        </p>
+    </li>
+</ul>
+<input id="js-publishment-checkbox-profile-checkbox" type="checkbox" name="is_published_profile">
+<input id="js-publishment-checkbox-introduction-checkbox" type="checkbox" name="is_published_introduction">
+<input id="js-publishment-checkbox-url-checkbox" type="checkbox" name="is_published_url">
+<input id="js-publishment-checkbox-twitter-url-checkbox" type="checkbox" name="is_published_twitter_url">
+<input id="js-publishment-checkbox-records-checkbox" type="checkbox" name="is_published_records">
+
 <input type="submit" value="更新" style="margin-top:60px">
 <% end %>
 
