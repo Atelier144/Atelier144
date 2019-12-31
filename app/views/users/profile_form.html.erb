@@ -1,21 +1,4 @@
-<h1>アカウント設定</h1>
-<ul class="setting-menu">
-    <li>
-        <%= link_to("プロフィール設定", "/settings/profile") %>
-    </li>
-    <li>
-        <%= link_to("パスワード設定", "/settings/password") %>
-    </li>
-    <li>
-        <%= link_to("メールアドレス設定", "/settings/email") %>
-    </li>
-    <li>
-        <%= link_to("SNS設定", "/settings/social") %>
-    </li>
-    <li>
-        <%= link_to("レコード設定", "/settings/records") %>
-    </li>
-</ul>
+<%= render :partial => "setting_menu" %>
 
 <%= form_tag("/settings/profile", class:"form-beta", multipart: true) do %>
 <h3>プロフィール設定</h3>

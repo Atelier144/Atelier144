@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get "/contact", to: "home#contact_form"
   post "/contact", to: "home#contact"
-  get "/contact/certificated", to: "home#certificated_contact"
+  get "/contact/done", to: "home#contact_done"
 
   get "/profiles/:id", to: "users#show"
 
@@ -49,9 +49,16 @@ Rails.application.routes.draw do
   post "/settings/email", to: "users#update_email"
   post "/settings/email/create", to: "users#create_email"
 
-  post "/settings/social/disconnect_twitter", to: "users#disconnect_twitter"
-  post "/settings/social/disconnect_facebook", to: "users#disconnect_facebook"
-  
+  post "/settings/social/disconnect-twitter", to: "users#disconnect_twitter"
+  post "/settings/social/disconnect-facebook", to: "users#disconnect_facebook"
+
+  get "/settings/profile/done", to: "users#profile_done"
+  get "/settings/password/done", to: "users#password_done"
+  get "/settings/email/done", to: "users#email_done"
+  get "/settings/social/done/:code", to: "users#social_done"
+  get "/settings/records/done", to: "users#records_done"
+  get "/settings/email/create/done", to: "users#create_email_done"
+
   get "/games/infinite_blocks", to: "infinite_blocks#home"
   get "/games/infinite_blocks/records", to: "infinite_blocks#records"
   get "/games/infinite_blocks/records/yearly", to: "infinite_blocks#records"

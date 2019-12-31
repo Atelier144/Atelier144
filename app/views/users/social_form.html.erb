@@ -1,21 +1,5 @@
-<h1>アカウント設定</h1>
-<ul class="setting-menu">
-    <li>
-        <%= link_to("プロフィール設定", "/settings/profile") %>
-    </li>
-    <li>
-        <%= link_to("パスワード設定", "/settings/password") %>
-    </li>
-    <li>
-        <%= link_to("メールアドレス設定", "/settings/email") %>
-    </li>
-    <li>
-        <%= link_to("SNS設定", "/settings/social") %>
-    </li>
-    <li>
-        <%= link_to("レコード設定", "/settings/records") %>
-    </li>
-</ul>
+<%= render :partial => "setting_menu" %>
+
 <% if @current_user.twitter_uid.nil? %>
 <div class="form-beta">
     <h3>SNS設定</h3>
@@ -30,7 +14,7 @@
 <div class="form-beta">
     <h3>SNS設定</h3>
     <div class="social-notice">このアカウントはTwitterと連携済みです</div>
-    <%= link_to("/settings/social/disconnect_twitter", class:"disconnect-twitter", style:"margin-top:20px", method: "POST") do %>
+    <%= link_to("/settings/social/disconnect-twitter", class:"disconnect-twitter", style:"margin-top:20px", method: "POST") do %>
     <i class="fab fa-twitter"></i> Twitterとの連携を解除する
     <% end %>
 </div>

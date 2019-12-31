@@ -55,13 +55,13 @@ class HomeController < ApplicationController
 
     if is_genuine
       ContactMailer.send_mail(email, title, content).deliver
-      redirect_to("/contact/certificated")
+      redirect_to("/contact/done")
     else
       redirect_to("/contact")
     end
   end
 
-  def certificated_contact
+  def contact_done
 
   end
 end

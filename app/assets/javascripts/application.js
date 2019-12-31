@@ -51,7 +51,6 @@ $(document).ready(function () {
         interval: 10000
     });
 
-    /*
     $("#js-signup-form-username").on("change", function () {
         var username = $(this).prop("value");
         if (username === "") {
@@ -117,7 +116,6 @@ $(document).ready(function () {
     });
 
 
-
     $("#js-signup-form-password-confirmation").on("change", function () {
         var password = $("#js-signup-form-password").prop("value");
         var passwordConfirmation = $("#js-signup-form-password-confirmation").prop("value");
@@ -146,7 +144,7 @@ $(document).ready(function () {
         }
     }
 
-*/
+    */
     $("#js-setting-image-select").click(function () {
         $("#js-setting-image-file").click();
     });

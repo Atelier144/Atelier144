@@ -21,11 +21,38 @@ class UsersController < ApplicationController
 
   def email_form
   end
-
+  
   def social_form
   end
 
   def records_form
+  end
+
+  def profile_done
+
+  end
+
+  def password_done
+
+  end
+
+  def email_done
+
+  end
+
+  def create_email_done
+
+  end
+
+  def social_done
+    @message = nil
+    @message = "Twitterアカウントと連携しました。" if params[:code] == "connect-twitter"
+    @message = "Twitter連携を解除しました。" if params[:code] == "disconnect-twitter"
+
+  end
+
+  def records_done
+
   end
 
   def update_profile
@@ -81,7 +108,7 @@ class UsersController < ApplicationController
       user.is_published_records = params[:is_published_records] == "on"
 
       if user.save
-        redirect_to("/settings/profile")
+        redirect_to("/settings/profile/done")
       else
         flash[:notice] = "プロフィールの更新に失敗しました"
         redirect_to("/settings/profile")
@@ -92,7 +119,6 @@ class UsersController < ApplicationController
   end
 
   def update_password
-
   end
 
   def update_email
@@ -370,7 +396,7 @@ class UsersController < ApplicationController
       if found_user
         if session[:user_id]
           puts "Twitter Connection Error"
-          flash[:twitter_connection_error] = "このTwitterアカウントは既に使用されています"
+          flash[:twitter_connection_error] = "そのTwitterアカウントは既に利用されています"
           redirect_to("/settings/social")
         else
           puts "Twitter Login"
@@ -384,7 +410,7 @@ class UsersController < ApplicationController
           user.twitter_uid = params[:uid]
           user.twitter_url = params[:twitter_url]
           if user.save
-            redirect_to("/settings/social")
+            redirect_to("/settings/social/done/connect-twitter")
           else
             flash[:notice] = "Twitterとの連携に失敗しました"
             redirect_to("/settings/social")
@@ -426,7 +452,7 @@ class UsersController < ApplicationController
       user.twitter_uid = nil
       user.twitter_url = nil
       if user.save
-        redirect_to("/settings/social")
+        redirect_to("/settings/social/done/disconnect-twitter")
       else
         flash[:notice] = " Twitter連携解除に失敗しました"
         redirect_to("/settings/social")
