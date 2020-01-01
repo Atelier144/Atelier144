@@ -121,6 +121,18 @@ $(document).ready(function () {
             }
         }
     });
+
+    $(".js-div-checkbox").click(function () {
+        var id = $(this).attr("id");
+        var checkboxId = "#" + id + "-checkbox";
+        if ($(this).hasClass("checked")) {
+            $(this).removeClass("checked").text("非公開")
+            $(checkboxId).prop("checked", "");
+        } else {
+            $(this).addClass("checked").text("公開")
+            $(checkboxId).prop("checked", "checked");
+        }
+    });
 });
 
 function GetUserIdFromUnity() {

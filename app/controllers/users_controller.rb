@@ -60,9 +60,14 @@ class UsersController < ApplicationController
     username = params[:username]
     introduction = params[:introduction]
     website = params[:website]
-    is_genuine = "true"
 
-    puts params[:is_published_profile] == "on"
+    is_published_profile = params[:is_published_profile] == "on"
+    is_published_introduction = params[:is_published_introduction] == "on"
+    is_published_url = params[:is_published_url] == "on"
+    is_published_twitter_url = params[:is_published_twitter_url] == "on"
+    is_published_records = params[:is_published_records] == "on"
+
+    is_genuine = "true"
 
     if username == ""
       is_genuine = nil
@@ -91,6 +96,12 @@ class UsersController < ApplicationController
       flash[:website] = website
     end
     
+    flash[:is_published_profile] = is_published_profile
+    flash[:is_published_introduction] = is_published_introduction
+    flash[:is_published_url] = is_published_url
+    flash[:is_published_twitter_url] = is_published_twitter_url
+    flash[:is_published_records] = is_published_records
+
     if is_genuine
       if params[:is_default]
         user.remove_image_name!
@@ -101,11 +112,11 @@ class UsersController < ApplicationController
       user.introduction = introduction
       user.web_site = website == "" ? nil : website
 
-      user.is_published_profile = params[:is_published_profile] == "on"
-      user.is_published_introduction = params[:is_published_introduction] == "on"
-      user.is_published_url = params[:is_published_url] == "on"
-      user.is_published_twitter_url = params[:is_published_twitter_url] == "on"
-      user.is_published_records = params[:is_published_records] == "on"
+      user.is_published_profile = is_published_profile
+      user.is_published_introduction = is_published_introduction
+      user.is_published_url = is_published_url
+      user.is_published_twitter_url = is_published_twitter_url
+      user.is_published_records = is_published_records
 
       if user.save
         redirect_to("/settings/profile/done")

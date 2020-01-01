@@ -45,51 +45,51 @@
 <h5 style="margin-top:25px">公開設定</h5>
 <ul class="published-list">
     <li>
-        <div id="js-publishment-checkbox-profile" class="js-div-checkbox div-checkbox">
-            非公開
+        <div id="js-publishment-checkbox-profile" class="<%= get_class_publishment_list(flash[:is_published_profile],@current_user.is_published_profile) %>">
+            <%= get_content_publishment_list(flash[:is_published_profile],@current_user.is_published_profile) %>
         </div>
         <p>
             プロフィール
         </p>
     </li>
     <li>
-        <div id="js-publishment-checkbox-introduction" class="js-div-checkbox div-checkbox checked">
-            公開
+        <div id="js-publishment-checkbox-introduction" class="<%= get_class_publishment_list(flash[:is_published_introduction],@current_user.is_published_introduction) %>">
+            <%= get_content_publishment_list(flash[:is_published_introduction],@current_user.is_published_introduction) %>
         </div>
         <p>
             自己紹介
         </p>
     </li>
     <li>
-        <div id="js-publishment-checkbox-url" class="js-div-checkbox div-checkbox">
-            非公開
+        <div id="js-publishment-checkbox-url" class="<%= get_class_publishment_list(flash[:is_published_url],@current_user.is_published_url) %>">
+            <%= get_content_publishment_list(flash[:is_published_url],@current_user.is_published_url) %>
         </div>
         <p>
             ホームページ
         </p>
     </li>
     <li>
-        <div id="js-publishment-checkbox-twitter_url" class="js-div-checkbox div-checkbox">
-            非公開
+        <div id="js-publishment-checkbox-twitter-url" class="<%= get_class_publishment_list(flash[:is_published_twitter_url],@current_user.is_published_twitter_url) %>">
+            <%= get_content_publishment_list(flash[:is_published_twitter_url],@current_user.is_published_twitter_url) %>
         </div>
         <p>
             Twitterアカウント
         </p>
     </li>
     <li>
-        <div id="js-publishment-checkbox-records" class="js-div-checkbox div-checkbox">
-            非公開
+        <div id="js-publishment-checkbox-records" class="<%= get_class_publishment_list(flash[:is_published_records],@current_user.is_published_records) %>">
+            <%= get_content_publishment_list(flash[:is_published_records],@current_user.is_published_records) %>
         </div>
         <p>
             ランキング
         </p>
     </li>
 </ul>
-<input id="js-publishment-checkbox-profile-checkbox" type="checkbox" name="is_published_profile">
-<input id="js-publishment-checkbox-introduction-checkbox" type="checkbox" name="is_published_introduction">
-<input id="js-publishment-checkbox-url-checkbox" type="checkbox" name="is_published_url">
-<input id="js-publishment-checkbox-twitter-url-checkbox" type="checkbox" name="is_published_twitter_url">
-<input id="js-publishment-checkbox-records-checkbox" type="checkbox" name="is_published_records">
+<input id="js-publishment-checkbox-profile-checkbox" type="checkbox" name="is_published_profile" <%= get_checked_publishment_list(flash[:is_published_profile], @current_user.is_published_profile) %> style="display:none">
+<input id="js-publishment-checkbox-introduction-checkbox" type="checkbox" name="is_published_introduction" <%= get_checked_publishment_list(flash[:is_published_introduction], @current_user.is_published_introduction) %> style="display:none">
+<input id="js-publishment-checkbox-url-checkbox" type="checkbox" name="is_published_url" <%= get_checked_publishment_list(flash[:is_published_url], @current_user.is_published_url) %> style="display:none">
+<input id="js-publishment-checkbox-twitter-url-checkbox" type="checkbox" name="is_published_twitter_url" <%= get_checked_publishment_list(flash[:is_published_twitter_url], @current_user.is_published_twitter_url) %> style="display:none">
+<input id="js-publishment-checkbox-records-checkbox" type="checkbox" name="is_published_records" <%= get_checked_publishment_list(flash[:is_published_records], @current_user.is_published_records) %> style="display:none">
 
 <input type="submit" value="更新" style="margin-top:60px">
 <% end %>
