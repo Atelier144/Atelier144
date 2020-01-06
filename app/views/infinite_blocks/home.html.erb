@@ -3,18 +3,393 @@
 
 
 <h1>Infinite Blocks</h1>
-<section>
+<div class="webgl-game">
     <div class="game-container" style="width: 1024px; height: 768px">
         <div id="gameContainer" style="width: 1024px; height: 768px; margin: auto"></div>
     </div>
     <div class="game-container-notice">
         <p>ブラウザの横幅を1080px以上にしてください。</p>
     </div>
-    <p>ランキングを見るには<%= link_to("こちら", "/games/infinite_blocks/records") %>をクリック</p>
-</section>
+    <div class="notice">プレイするにはWebGL対応のブラウザが必要です</div>
+</div>
+
+
 <h2>遊び方</h2>
+<div class="infinite-blocks-instructions">
+    <ul class="explanations-menu">
+        <li>
+            <a href="#!" class="scroll" data-href="#control-section">基本操作</a>
+        </li>
+        <li>
+            <a href="#!" class="scroll" data-href="#screen-section">画面説明</a>
+        </li>
+        <li>
+            <a href="#!" class="scroll" data-href="#specification-section">基本仕様</a>
+        </li>
+        <li>
+            <a href="#!" class="scroll" data-href="#effect-section">エフェクト説明</a>
+        </li>
+        <li>
+            <a href="#!" class="scroll" data-href="#item-section">アイテム説明</a>
+        </li>
+        <li>
+            <a href="#!" class="scroll" data-href="#block-section">ブロック説明</a>
+        </li>
+    </ul>
+    <div id="control-section">
+        <h3>基本操作</h3>
+        <ul class="basic-explanations">
+            <li>使用するのはマウスのみで、左クリックのみを使用します。</li>
+            <li>ルールは基本的なブロック崩しと同じです。</li>
+            <li>マウスカーソルの位置に従って、ラケットが左右に移動します。</li>
+        </ul>
+    </div>
+    <div id="screen-section">
+        <h3>画面説明</h3>
+        <%= image_tag("WebGames/InfiniteBlocks/ScreenExplanation.png") %>
+        <table class="screen-explanations">
+            <tbody valign="top">
+                <tr>
+                    <td>（1）</td>
+                    <td>メイン画面です。（一部のエフェクトが有効な時にクリックできます）</td>
+                </tr>
+                <tr>
+                    <td>（2）</td>
+                    <td>現在のスコアを表します。</td>
+                </tr>
+                <tr>
+                    <td>（3）</td>
+                    <td>現在のハイスコアを表します。（途中レベルからプレイを開始した場合は表示されません）</td>
+                </tr>
+                <tr>
+                    <td>（4）</td>
+                    <td>現在のレベルを表します。</td>
+                </tr>
+                <tr>
+                    <td>（5）</td>
+                    <td>現在のボールの残数を表します。（表示が0のときにボールを落下させるとゲームオーバーとなります）</td>
+                </tr>
+                <tr>
+                    <td>（6）</td>
+                    <td>このボタンをクリックすると、ゲームを終了してタイトル画面に戻ります。（一旦ダイアログが表示されます）</td>
+                </tr>
+                <tr>
+                    <td>（7）</td>
+                    <td>このボタンをクリックすると、ゲームを終了して結果画面に進みます。（一旦ダイアログが表示されます）</td>
+                </tr>
+                <tr>
+                    <td>（8）</td>
+                    <td>BGMの音量を調整できます。</td>
+                </tr>
+                <tr>
+                    <td>（9）</td>
+                    <td>効果音の音量を調整できます。</td>
+                </tr>
+                <tr>
+                    <td>（10）</td>
+                    <td>この枠内をクリックすると、ボールがゆっくりと降下します。</td>
+                </tr>
+                <tr>
+                    <td>（11）</td>
+                    <td>アイテムのエフェクトが有効かどうかを表します。<br>（有効時にクリックするとエフェクトを無効化できます、エフェクトについては<a href="#!" class="scroll" data-href="#effect-section">こちら</a>をご覧ください）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="specification-section">
+        <h3>基本仕様</h3>
+        <ul class="basic-explanations">
+            <li>ラケットの左側に当たれば左方向に、右側に当たれば右方向に、ボールが跳ね返ります。</li>
+            <li>一部レベルを除き、画面上にある全ての破壊可能ブロックを壊せばレベルアップとなります。</li>
+            <li>ボールを落下させるまで、ボールを跳ね返せば跳ね返すほど、ボールのスピードが徐々に加速します。</li>
+            <li>ブロックを壊すと時々、アイテムと呼ばれる四角い物体が降下します。アイテムはラケットに触れることによってゲットとなります。<br>（アイテムについては<a href="#!" class="scroll" data-href="#item-section">こちら</a>をご覧ください）</li>
+            <li>アイテムによって延長されたラケットは、レベルアップと同時に元に戻ります。</li>
+            <li>アイテムによって短縮されたラケットは、レベルアップおよびボール落下と同時に元に戻ります。</li>
+            <li>落下ゾーンが赤紫色に光るレベルは、ボール落下と同時にレベルアップとなります。</li>
+            <li>落下ゾーンおよび天井が黄色く光るレベルは、天井と落下ゾーンをボールがループします。（ボールは通常どおり落下します）</li>
+            <li>連続でブロックを壊せば獲得ポイントがいつもより増えるよ！</li>
+            <li>レベルによって、システムと呼ばれる様々なマシンが続々と登場！どんなシステムかはゲームをプレイして確かめてね！</li>
+            <li>ランキング機能搭載！ランキングを見るには<%= link_to("こちら", "/games/infinite-blocks/records") %>をクリック！</li>
+            <li>非ログイン時、および、途中レベルから始めた場合はランキング登録できません。</li>
+        </ul>
+    </div>
+    <div id="effect-section">
+        <h3>エフェクト説明</h3>
+        <table class="effect-explanations">
+            <tbody>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectReplay.png") %></td>
+                    <td>点灯している間、ボールを落下させても残数が減りません。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectPowerUp.png") %></td>
+                    <td>点灯している間、ボールの破壊力が強化されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectProtector.png") %></td>
+                    <td>点灯している間、ボールの落下を防ぐバリアが張られます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png") %></td>
+                    <td>点灯している間、アイテムやブロック、システムの負の効果が無効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectPrecipitate.png") %></td>
+                    <td>点灯している間にメイン画面をクリックすると、ボールを垂直降下させることができます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectShooting.png") %></td>
+                    <td>点灯している間にメイン画面をクリックすると、ラケットの中心から弾を発射できます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectMagnet.png") %></td>
+                    <td>点灯している間、ボールがラケットの中心部に向かって移動します。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectSticky.png") %></td>
+                    <td>点灯している間、ボールはラケットに付着します。（付着時にメイン画面をクリックすると跳ね返ります）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="item-section">
+        <h3>アイテム説明</h3>
+        <table class="item-explanations">
+            <tbody>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemPoint100.png") %></td>
+                    <td>100ポイント加点されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemPoint200.png") %></td>
+                    <td>200ポイント加点されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemPoint500.png") %></td>
+                    <td>500ポイント加点されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemPoint1000.png") %></td>
+                    <td>1000ポイント加点されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemPowerUp.png") %></td>
+                    <td>一定時間<%= image_tag("WebGames/InfiniteBlocks/EffectPowerUp.png", width: "20px", height:"20px") %>が有効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemProtector.png") %></td>
+                    <td>一定時間<%= image_tag("WebGames/InfiniteBlocks/EffectProtector.png", width: "20px", height:"20px") %>が有効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemTrapGuard.png") %></td>
+                    <td>一定時間<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が有効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemPrecipitate.png") %></td>
+                    <td>一定時間<%= image_tag("WebGames/InfiniteBlocks/EffectPrecipitate.png", width: "20px", height:"20px") %>が有効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemShooting.png") %></td>
+                    <td>一定時間<%= image_tag("WebGames/InfiniteBlocks/EffectShooting.png", width: "20px", height:"20px") %>が有効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemMagnet.png") %></td>
+                    <td>一定時間<%= image_tag("WebGames/InfiniteBlocks/EffectMagnet.png", width: "20px", height:"20px") %>が有効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemSticky.png") %></td>
+                    <td>一定時間<%= image_tag("WebGames/InfiniteBlocks/EffectSticky.png", width: "20px", height:"20px") %>が有効になります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemExpandRacket.png") %></td>
+                    <td>ラケットが延長されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemShrinkRacket.png") %></td>
+                    <td>ラケットが短縮されます。（<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が有効な間は無効）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemExtraBall.png") %></td>
+                    <td>ボールの残数が1つ増えます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemLevelUp.png") %></td>
+                    <td>レベルアップします。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemDecelerate.png") %></td>
+                    <td>ボールの動きが遅くなります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemAccelerate.png") %></td>
+                    <td>ボールの動きが速くなります。（<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が有効な間は無効）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemMaxSpeed.png") %></td>
+                    <td>ボールの動きが最速になります。（<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が有効な間は無効）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemNegativePoint200.png") %></td>
+                    <td>200ポイント減点されます。（<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が有効な間は無効）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemHostage300.png") %></td>
+                    <td>300ポイント加点されますが、<%= image_tag("WebGames/InfiniteBlocks/EffectReplay.png", width: "20px", height:"20px") %>または<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が無効時に取り逃すと強制ミスとなります。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemFlash.png") %></td>
+                    <td>画面全体が閃光に包まれます。（<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が有効な間は無効）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/ItemGameOver.png") %></td>
+                    <td>即ゲームオーバーになります。（<%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が有効な間は無効、<%= image_tag("WebGames/InfiniteBlocks/ExplanationGameOverBlock.png", width: "30px", height:"20px") %>のみ出現）</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="counterfeit-warning">
+            <h6>！！！偽物に要注意！！！</h6>
+            このゲームにおいて、特に高価なアイテムの偽物が確認されています。<br>
+            偽物を獲得するとラケットの大幅な短縮、大幅な減点、エフェクトの無効化などが起こることも確認されています。<br>
+            本物と偽物は外観が似ていますが異なります。<br>
+            高価なアイテムを獲得する際は細部をよく観察してください。
+        </div>
+    </div>
+    <div id="block-section">
+        <h3>ブロック説明</h3>
+        <table class="block-explanations">
+            <tbody>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockNormal.png") %></td>
+                    <td>いたって普通のブロックです。（10ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockHard.png") %></td>
+                    <td>通常3回（<%= image_tag("WebGames/InfiniteBlocks/EffectPowerUp.png", width: "20px", height:"20px") %>が有効な間は1回）当てると壊れます。（20ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockSteel.png") %></td>
+                    <td>破壊できません。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockSmall.png") %></td>
+                    <td>形状が小さい以外<%= image_tag("WebGames/InfiniteBlocks/ExplanationNormalBlock.png", width: "30px", height:"20px") %>と同じです。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockRound.png") %></td>
+                    <td>形状が円い以外<%= image_tag("WebGames/InfiniteBlocks/ExplanationNormalBlock.png", width: "30px", height:"20px") %>と同じです。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockCount.png") %></td>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectPowerUp.png", width: "20px", height:"20px") %>の効能に関係なく、数字の分の回数だけ当てると壊れます。（30ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockSilver.png") %></td>
+                    <td>壊すと100ポイント加点されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockGold.png") %></td>
+                    <td>壊すと500ポイント加点されます。</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockPowerUp.png") %></td>
+                    <td>壊すと必ず<%= image_tag("WebGames/InfiniteBlocks/ItemPowerUp.png", width: "20px", height:"20px") %>が降下します。（10ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockProtector.png") %></td>
+                    <td>壊すと必ず<%= image_tag("WebGames/InfiniteBlocks/ItemProtector.png", width: "20px", height:"20px") %>が降下します。（10ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockLevelUp.png") %></td>
+                    <td>壊すと必ず<%= image_tag("WebGames/InfiniteBlocks/ItemLevelUp.png", width: "20px", height:"20px") %>が降下します。（10ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockGameOver.png") %></td>
+                    <td>壊すと必ず<%= image_tag("WebGames/InfiniteBlocks/ItemGameOver.png", width: "20px", height:"20px") %>が降下します。（10ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockFlash.png") %></td>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が無効時に壊すと、画面が閃光に包まれます。（50ポイント）</td>
+                </tr>
+                <tr>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/BlockAccelerate.png") %></td>
+                    <td><%= image_tag("WebGames/InfiniteBlocks/EffectTrapGuard.png", width: "20px", height:"20px") %>が無効時に壊すと、ボールが加速します。（50ポイント）</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="other-blocks">他にも様々なブロックが登場するよ！</div>
+    </div>
+</div>
+
 <h2>問題報告</h2>
+<div class="contact-notice">
+    バグもしくは不具合、ご不明な点がございましたら、気軽に<%= link_to("こちら","/contact") %>よりお問い合わせください。
+</div>
 <h2>スクリーンショット</h2>
+<table class="webgames-screenshots">
+    <tbody>
+        <tr>
+            <td><%= image_tag("WebGames/InfiniteBlocks/Screenshot1.png", class: "js-webgames-screenshots-on") %></td>
+            <td><%= image_tag("WebGames/InfiniteBlocks/Screenshot2.png", class: "js-webgames-screenshots-on") %></td>
+            <td><%= image_tag("WebGames/InfiniteBlocks/Screenshot3.png", class: "js-webgames-screenshots-on") %></td>
+        </tr>
+        <tr>
+            <td><%= image_tag("WebGames/InfiniteBlocks/Screenshot4.png", class: "js-webgames-screenshots-on") %></td>
+            <td><%= image_tag("WebGames/InfiniteBlocks/Screenshot5.png", class: "js-webgames-screenshots-on") %></td>
+            <td><%= image_tag("WebGames/InfiniteBlocks/Screenshot6.png", class: "js-webgames-screenshots-on") %></td>
+        </tr>
+    </tbody>
+</table>
+<div class="webgames-screenshots-message">クリックすると拡大表示できます。</div>
+<div class="modal" id="screenshots-modal" tabindex="-1" role="dialog" aria-labelledby="screenshot-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" style="font-size:20px; font-weight:300">スクリーンショット</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="screenshots-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#screenshots-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#screenshots-carousel" data-slide-to="1"></li>
+                        <li data-target="#screenshots-carousel" data-slide-to="2"></li>
+                        <li data-target="#screenshots-carousel" data-slide-to="3"></li>
+                        <li data-target="#screenshots-carousel" data-slide-to="4"></li>
+                        <li data-target="#screenshots-carousel" data-slide-to="5"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot1.png", width: "768px", height: "576px") %>
+                        </div>
+                        <div class="carousel-item">
+                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot2.png", width: "768px", height: "576px") %>
+                        </div>
+                        <div class="carousel-item">
+                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot3.png", width: "768px", height: "576px") %>
+                        </div>
+                        <div class="carousel-item">
+                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot4.png", width: "768px", height: "576px") %>
+                        </div>
+                        <div class="carousel-item">
+                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot5.png", width: "768px", height: "576px") %>
+                        </div>
+                        <div class="carousel-item">
+                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot6.png", width: "768px", height: "576px") %>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#screenshots-carousel" role="button" data-slide="prev"><i class="fas fa-angle-left"></i></a>
+                    <a class="carousel-control-next" href="#screenshots-carousel" role="button" data-slide="next"><i class="fas fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="screenshots-carousel-container">
+
+</div>
 <h2>素材提供</h2>
 <div id="unity-user-id"><%= @user_id %></div>
 <div id="unity-language-code">1</div>

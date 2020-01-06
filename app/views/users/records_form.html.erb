@@ -1,91 +1,49 @@
 <%= render :partial => "setting_menu" %>
 
 <div class="form-beta">
-  <h3>レコード設定</h3>
-  <h4>ブラウザゲーム</h4>
-  <h5>Infinite Blocks</h5>
-  <table>
-    <tbody>
-      <tr>
-        <td>
-          <%= link_to("総合ランキング" , "/") %>
-        </td>
-        <td>
-          ：
-        </td>
-        <td>
-          12位
-        </td>
-        <td>
-          100000pts
-        </td>
-        <td>
-          Lv 24
-        </td>
-        <td>
-          2019年12月14日
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= link_to("年間ランキング" , "/") %>
-        </td>
-        <td>
-          ：
-        </td>
-        <td>
-          12位
-        </td>
-        <td>
-          100000pts
-        </td>
-        <td>
-          Lv 24
-        </td>
-        <td>
-          2019年12月14日
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= link_to("月間ランキング" , "/") %>
-        </td>
-        <td>
-          ：
-        </td>
-        <td>
-          12位
-        </td>
-        <td>
-          100000pts
-        </td>
-        <td>
-          Lv 24
-        </td>
-        <td>
-          2019年12月14日
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= link_to("週間ランキング" , "/") %>
-        </td>
-        <td>
-          ：
-        </td>
-        <td>
-          12位
-        </td>
-        <td>
-          100000pts
-        </td>
-        <td>
-          Lv 24
-        </td>
-        <td>
-          2019年12月14日
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <h3>レコード設定</h3>
+    <div class="users-records">
+        <h4>ブラウザゲーム</h4>
+        <table class="infinite-blocks">
+            <thead>
+                <tr>
+                    <td class="caption">Infinite Blocks</td>
+                    <td style="width:60px">Rank</td>
+                    <td style="width:90px">Score</td>
+                    <td style="width:60px">Level</td>
+                    <td style="width:120px">Date</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="url"><%= link_to("総合ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+                <tr>
+                    <td class="url"><%= link_to("年間ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+                <tr>
+                    <td class="url"><%= link_to("月間ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+                <tr>
+                    <td class="url"><%= link_to("週間ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_31_024752) do
+ActiveRecord::Schema.define(version: 2020_01_02_003053) do
 
   create_table "infinite_blocks_records", force: :cascade do |t|
     t.integer "user_id"

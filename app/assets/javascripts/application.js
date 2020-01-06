@@ -21,6 +21,14 @@
 $(document).ready(function () {
     var emailRegExp = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
+    $("a.scroll").click(function () {
+        var target = $(this).data("href");
+        var position = $(target).offset().top - 120;
+        $("html, body").animate({
+            "scrollTop": position
+        }, "slow");
+    });
+
     $(".pagetop").click(function () {
         $("html, body").animate({
             "scrollTop": 0
@@ -46,6 +54,7 @@ $(document).ready(function () {
     });
 
     $(".flash").delay(2000).fadeOut();
+
 
     $("#top-carousel").carousel({
         interval: 10000
@@ -133,6 +142,10 @@ $(document).ready(function () {
             $(checkboxId).prop("checked", "checked");
         }
     });
+
+    $(".js-webgames-screenshots-on").click(function () {
+        $("#screenshots-modal").modal("show");
+    });
 });
 
 function GetUserIdFromUnity() {
@@ -145,7 +158,7 @@ function GetLanguageCodeFromUnity() {
 
 function SendInfiniteBlocksRecordFromUnity(userId, score, level) {
     $.ajax({
-        url: "/games/infinite_blocks/record",
+        url: "/games/infinite-blocks/record",
         type: "POST",
         data: {
             user_id: userId,
@@ -155,7 +168,7 @@ function SendInfiniteBlocksRecordFromUnity(userId, score, level) {
         dataType: "html",
         success: function (data) {
             console.log("SUCCESS");
-            window.location.href = "/games/infinite_blocks/records";
+            window.location.href = "/games/infinite-blocks/records";
         },
         error: function (data) {
             console.log("FAILED");

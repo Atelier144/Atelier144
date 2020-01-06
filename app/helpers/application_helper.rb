@@ -11,4 +11,8 @@ module ApplicationHelper
             return "record regular"
         end
     end
+
+    def nil_hyphen(s)
+        return s.nil? ? "ー" : s
+    end
 end

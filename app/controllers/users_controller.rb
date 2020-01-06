@@ -11,6 +11,10 @@ class UsersController < ApplicationController
       flash[:notice] = "そのアカウントは存在しません"
       redirect_to("/")
     end
+    @infinite_blocks_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
+    @infinite_blocks_yearly_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
+    @infinite_blocks_monthly_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
+    @infinite_blocks_weekly_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
   end
 
   def profile_form
@@ -26,6 +30,10 @@ class UsersController < ApplicationController
   end
 
   def records_form
+    @infinite_blocks_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
+    @infinite_blocks_yearly_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
+    @infinite_blocks_monthly_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
+    @infinite_blocks_weekly_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
   end
 
   def profile_done

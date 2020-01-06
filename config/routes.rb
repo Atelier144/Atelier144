@@ -59,11 +59,14 @@ Rails.application.routes.draw do
   get "/settings/records/done", to: "users#records_done"
   get "/settings/email/create/done", to: "users#create_email_done"
 
-  get "/games/infinite_blocks", to: "infinite_blocks#home"
-  get "/games/infinite_blocks/records", to: "infinite_blocks#records"
-  get "/games/infinite_blocks/records/yearly", to: "infinite_blocks#records"
-  get "/games/infinite_blocks/records/monthly", to: "infinite_blocks#records"
-  get "/games/infinite_blocks/records/weekly", to: "infinite_blocks#records"
+  get "/games/infinite-blocks", to: "infinite_blocks#home"
+  get "/games/infinite-blocks/records", to: "infinite_blocks#records"
+  get "/games/infinite-blocks/records/yearly", to: "infinite_blocks#records"
+  get "/games/infinite-blocks/records/monthly", to: "infinite_blocks#records"
+  get "/games/infinite-blocks/records/weekly", to: "infinite_blocks#records"
 
-  post "/games/infinite_blocks/record", to: "infinite_blocks#record"
+  post "/games/infinite-blocks/record", to: "infinite_blocks#record"
+
+  get "/#{Rails.application.credentials.confidential_address[:administrator]}/:id", to: "users#show"
+  get "/#{Rails.application.credentials.confidential_address[:unity]}/:id", to: "users#show"
 end

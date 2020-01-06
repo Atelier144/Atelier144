@@ -24,23 +24,10 @@ class InfiniteBlocksController < ApplicationController
     score = params.require(:score).to_i
     level = params.require(:level).to_i
     
-    @record = InfiniteBlocksRecord.find_or_initialize_by(user_id: user_id)
-    if @record.score.nil?
-      @record.score = 0
-    end
-    if @record.level.nil?
-      @record.level = 1
-    end
+    record = InfiniteBlocksRecord.new(user_id: user_id, score: score, level: level)
 
-    if @record.score < score
-      @record.score = score
-      @record.level = level
-    elsif @record.score == score && @record.level < level
-      @record.level = level
-    end
-
-    if @record.save
-      redirect_to("/games/infinite_blocks/records")
+    if record.save
+      redirect_to("/games/infinite-blocks/records")
     else
       flash[:notice] = "ランキングの登録に失敗しました"
       redirect_to("/")

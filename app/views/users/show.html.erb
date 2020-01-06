@@ -22,11 +22,49 @@
 
     </div>
     <hr>
-    <div class="whole-records">
+    <div class="users-records">
         <h4>ブラウザゲームの記録</h4>
-        <div class="records">
-            <h6>Infinite Blocks</h6>
-        </div>
+        <table class="infinite-blocks">
+            <thead>
+                <tr>
+                    <td class="caption">Infinite Blocks</td>
+                    <td style="width:60px">Rank</td>
+                    <td style="width:90px">Score</td>
+                    <td style="width:60px">Level</td>
+                    <td style="width:120px">Date</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="url"><%= link_to("総合ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+                <tr>
+                    <td class="url"><%= link_to("年間ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_yearly_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+                <tr>
+                    <td class="url"><%= link_to("月間ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_monthly_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+                <tr>
+                    <td class="url"><%= link_to("週間ランキング", "/games/infinite-blocks/records") %>：</td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.rank) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.score) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.level) %></td>
+                    <td><%= nil_hyphen(@infinite_blocks_weekly_record.updated_at.strftime("%Y/%m/%d")) %></td>
+                </tr>
+            </tbody>
+        </table>
         <h4>モバイルゲームの記録</h4>
         <div class="preparation">準備中</div>
     </div>

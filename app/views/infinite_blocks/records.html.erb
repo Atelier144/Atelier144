@@ -31,7 +31,7 @@
             <div class="username"><%= link_to(record.user.name, "/profiles/#{record.user.id}") %></div>
             <div class="score"><%= record.score %></div>
             <div class="level"><%= record.level%></div>
-            <div class="date"><%= record.created_at.strftime("%Y/%m/%d") %></div>
+            <div class="date"><%= record.updated_at.strftime("%Y/%m/%d") %></div>
         </div>
         <% end %>
     </div>
