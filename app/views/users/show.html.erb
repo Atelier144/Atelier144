@@ -3,25 +3,41 @@
     <%= image_tag(@user.image_name.url, class: "user-image") %>
     <div class="username"><%= @user.name %></div>
     <hr>
+    <% if @user.is_published_profile == false %>
+    <div class="hidden-profile">プロフィールは非公開となっております</div>
+    <% else %>
+    <% if @user.is_published_introduction == false %>
+    <div class="introduction-hidden">自己紹介は非公開となっております</div>
+    <% elsif @user.introduction %>
     <div class="introduction"><%= @user.introduction %></div>
+    <% else %>
+    <div class="introduction-non-set">（未設定）</div>
+    <% end %>
     <hr>
     <div class="urls">
         <h5><i class="fas fa-home"></i> ホームページ</h5>
-        <% if @user.web_site %>
+        <% if @user.is_published_url == false %>
+        <div class="hidden">非公開</div>
+        <% elsif @user.web_site %>
         <a href="<%= @user.web_site %>" target="_blank"><%= @user.web_site %></a>
         <% else %>
-        <div>未設定</div>
+        <div class="non-set">（未設定）</div>
         <% end %>
 
         <h5 style="margin-top:30px"><i class="fab fa-twitter"></i> Twitterアカウント</h5>
-        <% if @user.twitter_url %>
+        <% if @user.is_published_twitter_url == false %>
+        <div class="hidden">非公開</div>
+        <% elsif @user.twitter_url %>
         <a href="<%= @user.twitter_url %>" target="_blank"><%= @user.twitter_url %></a>
         <% else %>
-        <div>未設定</div>
+        <div class="non-set">（未設定）</div>
         <% end %>
 
     </div>
     <hr>
+    <% if @user.is_published_records == false %>
+    <div class="users-records-hidden">記録は非公開となっております</div>
+    <% else %>
     <div class="users-records">
         <h4>ブラウザゲームの記録</h4>
         <table class="infinite-blocks" style="margin-bottom:50px">
@@ -96,6 +112,8 @@
         <h4>モバイルゲームの記録</h4>
         <div class="preparation" style="margin-top:20px">準備中</div>
     </div>
+    <% end %>
+    <% end %>
 </div>
 <div class="sponsored-link" style="margin-top:50px; margin-bottom:100px;">
     <h6>Sponsored Link</h6>

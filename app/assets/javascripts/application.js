@@ -29,7 +29,7 @@ $(document).ready(function () {
         }, "slow");
     });
 
-    $(".pagetop").click(function () {
+    $(".page-top").click(function () {
         $("html, body").animate({
             "scrollTop": 0
         }, "slow");

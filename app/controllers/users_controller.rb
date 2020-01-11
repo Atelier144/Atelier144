@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   before_action :forbid_login_user, only:[:login, :login_form, :signup, :signup_form]
   before_action :authenticate_user, only:[:profile_form, :password_form, :email_form, :social_form, :records_form]
+  before_action :authenticate_user, only:[:profile_done, :password_done, :email_done, :social_done, :records_done]
 
   def show
     @user = User.find_by(id: params[:id])
@@ -88,7 +89,7 @@ class UsersController < ApplicationController
       flash[:username_warning] = "ユーザー名を入力してください"
     elsif User.where.not(id: user.id).find_by(name: username)
       is_genuine = nil
-      flash[:username] = ""
+      flash[:username] = nil
       flash[:username_warning] = "そのユーザー名は既に使用されています"
     else
       flash[:username] = username
@@ -123,7 +124,7 @@ class UsersController < ApplicationController
         user.image_name = params[:image]
       end
       user.name = username
-      user.introduction = introduction
+      user.introduction = introduction == "" ? nil : introduction
       user.web_site = website == "" ? nil : website
 
       user.is_published_profile = is_published_profile
@@ -278,6 +279,10 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to("/")
+    else
+      flash[:email] = params[:email]
+      flash[:warning] = "メールアドレスもしくはパスワードが間違っています"
+      redirect_to("/login")
     end
   end
 
@@ -484,6 +489,20 @@ class UsersController < ApplicationController
           puts "Twitter Signup"
           password = generate_random_code(30)
           new_user = User.new(name: params[:name], twitter_uid: params[:uid], password: password)
+          new_user.name = params[:name]
+          index = 1
+          while User.find_by(name: new_user.name)
+            prev_name = new_user.name
+            index += 1
+            new_user.name = "#{prev_name}(#{index})"
+          end
+          new_user.password = password
+          new_user.password_confirmation = password
+          new_user.twitter_uid = params[:uid]
+          new_user.twitter_url = params[:twitter_url]
+          new_user.introduction = params[:introduction] == "" ? nil : params[:introduction]
+          new_user.web_site = params[:website] == "" ? nil : params[:website]
+
           if new_user.save
             session[:user_id] = User.find_by(twitter_uid: params[:uid]).id
             redirect_to("/")
@@ -543,7 +562,7 @@ class UsersController < ApplicationController
     yearly_record.destroy if yearly_record
     monthly_record.destroy if monthly_record
     weekly_record.destroy if weekly_record
-    
+
     redirect_to("/settings/records/done/delete-infinite-blocks")
   end
 
