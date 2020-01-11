@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   @@email_regexp = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
 
   def top
-    @news = News.all
+    @news = News.order(created_at: :desc).limit(5)
   end
 
   def games
@@ -10,10 +10,10 @@ class HomeController < ApplicationController
   end
 
   def apps
-
+    
   end
   def news
-
+    @news = News.order(created_at: :desc)
   end
   def terms
     

@@ -10,9 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_02_003053) do
+ActiveRecord::Schema.define(version: 2020_01_08_123852) do
+
+  create_table "infinite_blocks_monthly_records", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "score"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "infinite_blocks_records", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "score"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "infinite_blocks_weekly_records", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "score"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "infinite_blocks_yearly_records", force: :cascade do |t|
     t.integer "user_id"
     t.integer "score"
     t.integer "level"

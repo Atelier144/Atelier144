@@ -55,10 +55,13 @@ $(document).ready(function () {
 
     $(".flash").delay(2000).fadeOut();
 
+    setTimeout(function () {
+        $("#js-top-background").children("h1").fadeIn(1000);
+        setTimeout(function () {
+            $("#js-top-background").children("p").fadeIn(1000);
+        }, 1000);
+    }, 1000);
 
-    $("#top-carousel").carousel({
-        interval: 10000
-    });
 
     function signupConfirmation() {
         var isUsernameOK = $("#js-signup-form-username").hasClass("ok");
@@ -143,9 +146,20 @@ $(document).ready(function () {
         }
     });
 
+    $("#js-records-delete-infinite-blocks-button").click(function () {
+        var flag = confirm("本当に『Infinite Blocks』の全レコードを削除しますか？");
+
+        if (flag) {
+            $("#js-records-delete-infinite-blocks").click();
+        }
+    });
+
     $(".js-webgames-screenshots-on").click(function () {
+        var img = $(this).attr("src");
+        $("#js-webgames-screenshot").attr("src", img);
         $("#screenshots-modal").modal("show");
     });
+
 });
 
 function GetUserIdFromUnity() {

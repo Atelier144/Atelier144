@@ -1,16 +1,19 @@
 <h1>ブラウザゲーム集</h1>
-<section>
-    <table class="table-games">
+<table class="games">
+    <tbody>
         <tr>
             <td>
-                <%= link_to("/games/infinite_blocks") do %>
-                <div class="table-games-title">Infinite Blocks</div>
-                <%= image_tag("GameThumbnail.png") %>
-                <div class="table-games-genre">ジャンル：ブロック崩し</div>
-                <div class="table-games-description">総ステージ30、ブロックの種類は20種類以上、アイテムの種類も20種類以上、
-                10種類以上の機械、このゲームはボールが無くなるまでは終わらない。</div>
+                <%= link_to("/games/infinite-blocks", class: "web-game") do %>
+                <div class="title">Infinite Blocks</div>
+                <%= image_tag("GameThumbnailInfiniteBlocks.png") %>
+                <div class="genre">ジャンル：ブロック崩し</div>
+                <div class="description">最大レベル30、20種類以上のブロック、20種類以上のアイテム、そして10種類以上のシステム、このゲームはボールが無くなるまでは終わらない。</div>
                 <% end %>
             </td>
         </tr>
-    </table>
-</section>
+    </tbody>
+</table>
+<div class="sponsored-link" style="margin-top: 50px; margin-bottom:100px">
+    <h6>Sponsored Link</h6>
+    <div class="ads-body">Sponsored Link</div>
+</div>

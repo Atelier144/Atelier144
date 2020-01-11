@@ -13,7 +13,10 @@
     <div class="notice">プレイするにはWebGL対応のブラウザが必要です</div>
 </div>
 
-
+<div class="sponsored-link" style="margin-top:50px">
+    <h6>Sponsored Link</h6>
+    <div class="ads-body">Sponsored Link</div>
+</div>
 <h2>遊び方</h2>
 <div class="infinite-blocks-instructions">
     <ul class="explanations-menu">
@@ -109,7 +112,6 @@
             <li>落下ゾーンおよび天井が黄色く光るレベルは、天井と落下ゾーンをボールがループします。（ボールは通常どおり落下します）</li>
             <li>連続でブロックを壊せば獲得ポイントがいつもより増えるよ！</li>
             <li>レベルによって、システムと呼ばれる様々なマシンが続々と登場！どんなシステムかはゲームをプレイして確かめてね！</li>
-            <li>ランキング機能搭載！ランキングを見るには<%= link_to("こちら", "/games/infinite-blocks/records") %>をクリック！</li>
             <li>非ログイン時、および、途中レベルから始めた場合はランキング登録できません。</li>
         </ul>
     </div>
@@ -344,41 +346,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title" style="font-size:20px; font-weight:300">スクリーンショット</div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
-                <div id="screenshots-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#screenshots-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#screenshots-carousel" data-slide-to="1"></li>
-                        <li data-target="#screenshots-carousel" data-slide-to="2"></li>
-                        <li data-target="#screenshots-carousel" data-slide-to="3"></li>
-                        <li data-target="#screenshots-carousel" data-slide-to="4"></li>
-                        <li data-target="#screenshots-carousel" data-slide-to="5"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot1.png", width: "768px", height: "576px") %>
-                        </div>
-                        <div class="carousel-item">
-                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot2.png", width: "768px", height: "576px") %>
-                        </div>
-                        <div class="carousel-item">
-                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot3.png", width: "768px", height: "576px") %>
-                        </div>
-                        <div class="carousel-item">
-                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot4.png", width: "768px", height: "576px") %>
-                        </div>
-                        <div class="carousel-item">
-                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot5.png", width: "768px", height: "576px") %>
-                        </div>
-                        <div class="carousel-item">
-                            <%= image_tag("WebGames/InfiniteBlocks/Screenshot6.png", width: "768px", height: "576px") %>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#screenshots-carousel" role="button" data-slide="prev"><i class="fas fa-angle-left"></i></a>
-                    <a class="carousel-control-next" href="#screenshots-carousel" role="button" data-slide="next"><i class="fas fa-angle-right"></i></a>
+                <div class="webgames-screenshot">
+                    <%= image_tag("WebGames/InfiniteBlocks/Screenshot1.png",id: "js-webgames-screenshot", width: "720px", height: "540px") %>
                 </div>
             </div>
             <div class="modal-footer">
@@ -391,5 +363,14 @@
 
 </div>
 <h2>素材提供</h2>
+<ul class="special-thanks">
+    <li>効果音ラボ 様</li>
+    <li>魔王魂 様</li>
+    <li>くらげ工匠 様</li>
+</ul>
+<div class="sponsored-link" style="margin-top:50px; margin-bottom:100px;">
+    <h6>Sponsored Link</h6>
+    <div class="ads-body">Sponsored Link</div>
+</div>
 <div id="unity-user-id"><%= @user_id %></div>
 <div id="unity-language-code">1</div>

@@ -2,20 +2,20 @@
 
 <ul class="setting-menu">
     <li>
-        <%= link_to("総合ランキング", "/") %>
+        <%= link_to("総合ランキング", "/games/infinite-blocks/records") %>
     </li>
     <li>
-        <%= link_to("年間ランキング", "/") %>
+        <%= link_to("年間ランキング", "/games/infinite-blocks/records/yearly") %>
     </li>
     <li>
-        <%= link_to("月間ランキング", "/") %>
+        <%= link_to("月間ランキング", "/games/infinite-blocks/records/monthly") %>
     </li>
     <li>
-        <%= link_to("週間ランキング", "/") %>
+        <%= link_to("週間ランキング", "/games/infinite-blocks/records/weekly") %>
     </li>
 </ul>
 <div class="games-records">
-    <h3>総合ランキング</h3>
+    <h3><%= @title %></h3>
     <div class="infinite-blocks-records">
         <div class="column-names">
             <div class="rank">Rank</div>
@@ -24,7 +24,7 @@
             <div class="level">Level</div>
             <div class="date">Date</div>
         </div>
-        <% @whole_records.each.with_index(1) do |record, rank| %>
+        <% @records.each.with_index(1) do |record, rank| %>
         <div class="<%= record_get_rank(rank) %>">
             <div class="rank"><%= rank %></div>
             <div class="userimage"><%= link_to("/profiles/#{record.user.id}") do %><%= image_tag(record.user.image_name.url) %><% end %></div>
@@ -35,4 +35,8 @@
         </div>
         <% end %>
     </div>
+</div>
+<div class="sponsored-link" style="margin-bottom:100px">
+    <h6>Sponsored Link</h6>
+    <div class="ads-body">Sponsored Link</div>
 </div>

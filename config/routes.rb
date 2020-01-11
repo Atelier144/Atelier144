@@ -52,18 +52,18 @@ Rails.application.routes.draw do
   post "/settings/social/disconnect-twitter", to: "users#disconnect_twitter"
   post "/settings/social/disconnect-facebook", to: "users#disconnect_facebook"
 
+  post "/settings/records/delete/infinite-blocks", to: "users#delete_records_infinite_blocks"
+
   get "/settings/profile/done", to: "users#profile_done"
   get "/settings/password/done", to: "users#password_done"
   get "/settings/email/done", to: "users#email_done"
   get "/settings/social/done/:code", to: "users#social_done"
-  get "/settings/records/done", to: "users#records_done"
+  get "/settings/records/done/:code", to: "users#records_done"
   get "/settings/email/create/done", to: "users#create_email_done"
 
   get "/games/infinite-blocks", to: "infinite_blocks#home"
   get "/games/infinite-blocks/records", to: "infinite_blocks#records"
-  get "/games/infinite-blocks/records/yearly", to: "infinite_blocks#records"
-  get "/games/infinite-blocks/records/monthly", to: "infinite_blocks#records"
-  get "/games/infinite-blocks/records/weekly", to: "infinite_blocks#records"
+  get "/games/infinite-blocks/records/:type", to: "infinite_blocks#records"
 
   post "/games/infinite-blocks/record", to: "infinite_blocks#record"
 

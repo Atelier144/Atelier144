@@ -1,52 +1,55 @@
 <section id="top-section">
-    <div class="top-carousel-container">
-        <div id="top-carousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#top-carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#top-carousel" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <p>カルーセルてすと０</p>
-                </div>
-                <div class="carousel-item">
-                    <p>ATELIER 144</p>
-                </div>
-            </div>
-        </div>
+    <div id="js-top-background" class="top-background">
+        <h1>中規模ゲームも無料で遊べる<br>Atelier144</h1>
+        <p>
+            Atelier144はたった一人の趣味エンジニアによって開発・運用されている会員登録制のゲームサイトです。<br>
+            Twitterアカウント一つで様々な機能を搭載したゲームを無料でプレイできます。<br>
+            （会員登録しなくても遊べます。）
+        </p>
     </div>
 </section>
 <section id="news-section">
     <h2>更新情報</h2>
-    <div class="news-container">
-        <% @news.each do |anew| %>
-        <div class="news-record">
-            <div class="news-date">
-                <%= anew.created_at.strftime("%Y年%m月%d日") %>
-            </div>
-            <div class="news-content">
-                <%= anew.content %>
-            </div>
-        </div>
-        <% end %>
+    <table class="news">
+        <tbody>
+            <% @news.each do |anew| %>
+            <tr>
+                <td><%= anew.created_at.strftime("%Y年%m月%d日") %></td>
+                <td><%= anew.content %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <div class="sponsored-link" style="margin-top:50px">
+        <h6>Sponsored Link</h6>
+        <div class="ads-body">Sponsored Link</div>
     </div>
+
 </section>
 <section id="games-section" class="desktop-only">
     <h2>最新ブラウザゲーム集</h2>
-    <table class="table-games">
-        <tr>
-            <td>
-                <%= link_to("/games/infinite-blocks") do %>
-                <div class="table-games-title">Infinite Blocks</div>
-                <%= image_tag("GameThumbnail.png") %>
-                <div class="table-games-genre">ジャンル：ブロック崩し</div>
-                <div class="table-games-description">総ステージ30、ブロックの種類は20種類以上、アイテムの種類も20種類以上、
-                    10種類以上の機械、このゲームはボールが無くなるまでは終わらない。</div>
-                <% end %>
-            </td>
-        </tr>
+    <table class="games">
+        <tbody>
+
+
+            <tr>
+                <td>
+                    <%= link_to("/games/infinite-blocks", class: "web-game") do %>
+                    <div class="title">Infinite Blocks</div>
+                    <%= image_tag("GameThumbnailInfiniteBlocks.png") %>
+                    <div class="genre">ジャンル：ブロック崩し</div>
+                    <div class="description">最大レベル30、20種類以上のブロック、20種類以上のアイテム、そして10種類以上のシステム、このゲームはボールが無くなるまでは終わらない。</div>
+                    <% end %>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </section>
 <section id="applications-section">
     <h2>最新アプリ集</h2>
+    <div class="preparation">準備中</div>
+    <div class="sponsored-link" style="margin-top: 50px; margin-bottom:100px">
+        <h6>Sponsored Link</h6>
+        <div class="ads-body">Sponsored Link</div>
+    </div>
 </section>

@@ -12,9 +12,9 @@ class UsersController < ApplicationController
       redirect_to("/")
     end
     @infinite_blocks_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
-    @infinite_blocks_yearly_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
-    @infinite_blocks_monthly_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
-    @infinite_blocks_weekly_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
+    @infinite_blocks_yearly_record = InfiniteBlocksYearlyRecord.where("updated_at >= ?", Date.today.prev_year(1)).find_by(user_id: @user.id)
+    @infinite_blocks_monthly_record = InfiniteBlocksMonthlyRecord.where("updated_at >= ?", Date.today.prev_month(1)).find_by(user_id: @user.id)
+    @infinite_blocks_weekly_record = InfiniteBlocksWeeklyRecord.where("updated_at >= ?", Date.today.prev_day(7)).find_by(user_id: @user.id)
   end
 
   def profile_form
@@ -30,10 +30,10 @@ class UsersController < ApplicationController
   end
 
   def records_form
-    @infinite_blocks_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
-    @infinite_blocks_yearly_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
-    @infinite_blocks_monthly_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
-    @infinite_blocks_weekly_record = InfiniteBlocksRecord.find_by(user_id: @current_user.id)
+    @infinite_blocks_record = InfiniteBlocksRecord.where("updated_at >= ?", Date.today.prev_year(1)).find_by(user_id: @current_user.id)
+    @infinite_blocks_yearly_record = InfiniteBlocksYearlyRecord.where("updated_at >= ?", Date.today.prev_year(1)).find_by(user_id: @current_user.id)
+    @infinite_blocks_monthly_record = InfiniteBlocksMonthlyRecord.where("updated_at >= ?", Date.today.prev_month(1)).find_by(user_id: @current_user.id)
+    @infinite_blocks_weekly_record = InfiniteBlocksWeeklyRecord.where("updated_at >= ?", Date.today.prev_day(7)).find_by(user_id: @current_user.id)
   end
 
   def profile_done
@@ -60,7 +60,13 @@ class UsersController < ApplicationController
   end
 
   def records_done
+    @title = nil
+    @message = nil
 
+    if params[:code] == "delete-infinite-blocks"
+      @title = "レコード削除完了"
+      @message = "『Infinite Blocks』のレコードを削除しました。"
+    end
   end
 
   def update_profile
@@ -138,6 +144,46 @@ class UsersController < ApplicationController
   end
 
   def update_password
+    user = @current_user
+    current_password = params[:current_password]
+    new_password = params[:new_password]
+    new_password_confirmation = params[:new_password_confirmation]
+    is_genuine = "true"
+
+    if user.authenticate(current_password)
+      flash[:current_password] = current_password
+    else
+      is_genuine = nil
+      flash[:current_password_warning] = "パスワードが正しくありません"
+    end
+
+    if new_password.length < 8 || new_password.length > 32
+      is_genuine = nil
+      flash[:new_password_warning] = "8字以上、32字以下のパスワードを入力してください"
+    else
+      flash[:new_password] = new_password
+    end
+
+    if new_password != new_password_confirmation
+      is_genuine = nil
+      flash[:new_password_confirmation_warning] = "もう一度入力してください"
+    else
+      flash[:new_password_confirmation] = new_password_confirmation
+    end
+
+
+    if is_genuine
+      user.password = new_password
+      user.password_confirmation = new_password_confirmation
+      if user.save
+        redirect_to("/settings/password/done")
+      else
+        flash[:notice] = "パスワードの更新に失敗しました"
+        redirect_to("/settings/password")
+      end
+    else
+      redirect_to("/settings/password")
+    end
   end
 
   def update_email
@@ -166,7 +212,7 @@ class UsersController < ApplicationController
     if is_genuine
       user.email = new_email
       if user.save
-        redirect_to("/settings/email")
+        redirect_to("/settings/email/done")
       else
         flash[:notice] = "メールアドレスの更新に失敗しました"
         redirect_to("/settings/email")
@@ -484,6 +530,21 @@ class UsersController < ApplicationController
 
   def disconnect_facebook
 
+  end
+
+  def delete_records_infinite_blocks
+    user_id = @current_user.id
+    record = InfiniteBlocksRecord.find_by(user_id: user_id)
+    yearly_record = InfiniteBlocksYearlyRecord.find_by(user_id: user_id)
+    monthly_record = InfiniteBlocksMonthlyRecord.find_by(user_id: user_id)
+    weekly_record = InfiniteBlocksWeeklyRecord.find_by(user_id: user_id)
+
+    record.destroy if record
+    yearly_record.destroy if yearly_record
+    monthly_record.destroy if monthly_record
+    weekly_record.destroy if weekly_record
+    
+    redirect_to("/settings/records/done/delete-infinite-blocks")
   end
 
   private
