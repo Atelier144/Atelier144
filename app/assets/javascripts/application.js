@@ -113,16 +113,36 @@ $(document).ready(function () {
             }
         } else {
             if (file.type.match("image.*")) {
-                $("#js-setting-image-status").css("color", "#008000").css("background-color", "#80FF80").text("選択中");
-                $("#js-setting-image-name").text("ファイル名：" + file.name).css("color", "black");
-                $("#js-setting-image-is-default").prop("checked", false);
-                $("#js-setting-image-default").text("選択解除");
+                var fileNameRegExp = /\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$/
+                if (fileNameRegExp.test(file.name)) {
+                    if (file.size <= 2097152) {
+                        $("#js-setting-image-status").css("color", "#008000").css("background-color", "#80FF80").text("選択中");
+                        $("#js-setting-image-name").text("ファイル名：" + file.name).css("color", "black");
+                        $("#js-setting-image-is-default").prop("checked", false);
+                        $("#js-setting-image-default").text("選択解除");
 
-                var reader = new FileReader();
-                reader.onload = function () {
-                    $("#js-setting-image-image").attr("src", reader.result);
+                        var reader = new FileReader();
+                        reader.onload = function () {
+                            $("#js-setting-image-image").attr("src", reader.result);
+                        }
+                        reader.readAsDataURL(file);
+
+                    } else {
+                        $(this).val(undefined);
+                        $("#js-setting-image-is-default").prop("checked", false);
+                        $("#js-setting-image-status").css("color", "black").css("background-color", "#E6E6E6").text("未選択");
+                        $("#js-setting-image-name").text("2MB以内の画像ファイルをアップロードしてください").css("color", "red");
+                        $("#js-setting-image-default").text("デフォルトに戻す");
+                        $("#js-setting-image-image").attr("src", $("#js-setting-image-current-image").attr("src"));
+                    }
+                } else {
+                    $(this).val(undefined);
+                    $("#js-setting-image-is-default").prop("checked", false);
+                    $("#js-setting-image-status").css("color", "black").css("background-color", "#E6E6E6").text("未選択");
+                    $("#js-setting-image-name").text("gif、png、jpgの画像ファイルをアップロードしてください").css("color", "red");
+                    $("#js-setting-image-default").text("デフォルトに戻す");
+                    $("#js-setting-image-image").attr("src", $("#js-setting-image-current-image").attr("src"));
                 }
-                reader.readAsDataURL(file);
             } else {
                 $(this).val(undefined);
                 $("#js-setting-image-is-default").prop("checked", false);
@@ -182,7 +202,7 @@ function SendInfiniteBlocksRecordFromUnity(userId, score, level) {
         dataType: "html",
         success: function (data) {
             console.log("SUCCESS");
-            window.location.href = "/games/infinite-blocks/records";
+            window.location.href = "/games/infinite-blocks/result";
         },
         error: function (data) {
             console.log("FAILED");

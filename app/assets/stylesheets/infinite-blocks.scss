@@ -1,0 +1,162 @@
+.infinite-blocks-instructions {
+    width: 960px;
+    margin: 0px auto;
+
+    ul.explanations-menu {
+        margin-left: 20px;
+        list-style-type: circle;
+    }
+
+    ul.basic-explanations {
+        margin-left: 30px;
+        list-style-type: square;
+
+        li {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+    }
+
+    h3 {
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+
+    table.screen-explanations {
+        margin-top: 20px;
+        border-collapse: separate;
+        border-spacing: 0px 5px;
+
+        tr {
+            td:nth-child(1) {
+                font-family: Monaco;
+                text-align: right;
+                letter-spacing: 1px;
+            }
+        }
+
+    }
+
+    table.effect-explanations {
+        border-collapse: separate;
+        border-spacing: 0px 5px;
+
+        tr {
+            td:nth-child(2) {
+                padding-left: 10px;
+            }
+        }
+    }
+
+    table.item-explanations {
+        border-collapse: separate;
+        border-spacing: 0px 5px;
+
+        tr {
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            td:nth-child(2) {
+                padding-left: 10px;
+
+                img {
+                    vertical-align: sub;
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    table.block-explanations {
+        border-collapse: separate;
+        border-spacing: 0px 5px;
+
+        tr {
+            td:nth-child(2) {
+                padding-left: 10px;
+
+                img {
+                    vertical-align: sub;
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+        }
+
+    }
+
+    .counterfeit-warning {
+        margin-top: 20px;
+        border: 1px dashed red;
+        padding: 10px;
+
+        h6 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: red;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    .other-blocks {
+        margin-top: 20px;
+    }
+}
+
+.infinite-blocks-result {
+    width: 640px;
+    margin: 0px auto 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: white;
+    border: 1px solid black;
+
+    h3 {
+        text-align: center;
+        font-size: 36px;
+        font-weight: 500;
+        color: #608000;
+    }
+
+    table.score-level {
+        margin: 20px auto;
+
+        tbody {
+            tr {
+                font-size: 20px;
+                font-weight: 200;
+                letter-spacing: 2px;
+
+                td:nth-child(1) {
+                    text-align: right;
+                }
+
+                td:nth-child(2) {
+                    text-align: left;
+                }
+            }
+        }
+    }
+
+    table.rank {
+        margin: 30px auto 0px;
+
+        tbody {
+            tr {
+                font-size: 24px;
+                font-weight: 300;
+                letter-spacing: 2px;
+
+                td:nth-child(1) {
+                    text-align: right;
+                }
+
+                td:nth-child(2) {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

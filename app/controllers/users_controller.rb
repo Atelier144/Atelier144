@@ -3,15 +3,13 @@ class UsersController < ApplicationController
   @@url_regexp = Regexp.new(%r{^(http|https)://})
 
   before_action :forbid_login_user, only:[:login, :login_form, :signup, :signup_form]
+  before_action :does_exist_user, only:[:show]
   before_action :authenticate_user, only:[:profile_form, :password_form, :email_form, :social_form, :records_form]
   before_action :authenticate_user, only:[:profile_done, :password_done, :email_done, :social_done, :records_done]
 
   def show
     @user = User.find_by(id: params[:id])
-    unless @user
-      flash[:notice] = "そのアカウントは存在しません"
-      redirect_to("/")
-    end
+
     @infinite_blocks_record = InfiniteBlocksRecord.find_by(user_id: @user.id)
     @infinite_blocks_yearly_record = InfiniteBlocksYearlyRecord.where("updated_at >= ?", Date.today.prev_year(1)).find_by(user_id: @user.id)
     @infinite_blocks_monthly_record = InfiniteBlocksMonthlyRecord.where("updated_at >= ?", Date.today.prev_month(1)).find_by(user_id: @user.id)
@@ -376,16 +374,17 @@ class UsersController < ApplicationController
       user.new_password_hash = hash
       if user.save
         NewPasswordMailer.send_mail(user).deliver
-        redirect_to("/login/forgot_password/certificated")
+        redirect_to("/login/forgot-password/done")
       else
-        redirect_to("/login/forgot_password")
+        redirect_to("/login/forgot-password")
       end
     else
-      redirect_to("/login/forgot_password")
+      flash[:email_warning] = "メールアドレスが正しくありません"
+      redirect_to("/login/forgot-password")
     end
   end
 
-  def certificated_forgot_password
+  def forgot_password_done
 
   end
 
@@ -426,18 +425,22 @@ class UsersController < ApplicationController
         user.new_password_hash = nil
         if user.save
           session[:user_id] = user.id
-          redirect_to("/")
+          redirect_to("/new-password/done")
         else
           flash[:notice] = "パスワードの再設定に失敗しました"
           redirect_to("/")
         end
       else
-        redirect_to("/new_password/#{params[:hash]}")
+        redirect_to("/new-password/#{params[:hash]}")
       end
     else
       flash[:notice] = "権限がありません"
       redirect_to("/")
     end
+  end
+
+  def new_password_done
+
   end
 
   def twitter

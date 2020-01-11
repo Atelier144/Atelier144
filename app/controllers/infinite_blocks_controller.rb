@@ -1,6 +1,8 @@
 require "date"
 
 class InfiniteBlocksController < ApplicationController
+  before_action :set_twitter_client, only:[:tweet]
+
   def home
     @user_id = @current_user.nil? ? 0 : @current_user.id
   end
@@ -103,12 +105,32 @@ class InfiniteBlocksController < ApplicationController
     end
 
     if record.save && yearly_record.save && monthly_record.save && weekly_record.save
-      redirect_to("/games/infinite-blocks/records")
+      flash[:score] = score
+      flash[:level] = level
     else
       flash[:notice] = "ランキングの登録に失敗しました"
-      redirect_to("/")
     end
   end
 
+  def result
+    @user = @current_user
+    @has_twitter_account = @user.twitter_uid
+    @disabled = @has_twitter_account ? "" : "disabled"
+    @score = flash[:score].nil? ? "ー" : flash[:score]
+    @level = flash[:level].nil? ? "ー" : flash[:level]
+    @rank = "#{InfiniteBlocksRecord.find_by(user_id: @user.id).rank}位"
+    @yearly_rank = "#{InfiniteBlocksYearlyRecord.where("updated_at >= ?", Date.today.prev_year(1)).find_by(user_id: @user.id).rank}位"
+    @monthly_rank = "#{InfiniteBlocksMonthlyRecord.where("updated_at >= ?", Date.today.prev_month(1)).find_by(user_id: @user.id).rank}位"
+    @weekly_rank = "#{InfiniteBlocksWeeklyRecord.where("updated_at >= ?", Date.today.prev_day(7)).find_by(user_id: @user.id).rank}位"
+    @content = "https://gameatelier144.com/games/infinite-blocks\n『Infinite Blocks』\nスコア：#{@score}\nレベル：#{@level}\n総合ランキング：#{@rank}\n年間ランキング：#{@yearly_rank}\n月間ランキング：#{@monthly_rank}\n週間ランキング：#{@weekly_rank}\n#Atelier144 #InfiniteBlocks"
+  end
 
+  def tweet
+    @twitter_client.update(params[:content])
+    redirect_to("/games/infinite-blocks/result/tweet-done")
+  end
+
+  def tweet_done
+
+  end
 end

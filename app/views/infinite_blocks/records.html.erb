@@ -16,26 +16,30 @@
 </ul>
 <div class="games-records">
     <h3><%= @title %></h3>
-    <div class="infinite-blocks-records">
-        <div class="column-names">
-            <div class="rank">Rank</div>
-            <div class="user">User</div>
-            <div class="score">Score</div>
-            <div class="level">Level</div>
-            <div class="date">Date</div>
-        </div>
-        <% @records.each.with_index(1) do |record, rank| %>
-        <div class="<%= record_get_rank(rank) %>">
-            <div class="rank"><%= rank %></div>
-            <div class="userimage"><%= link_to("/profiles/#{record.user.id}") do %><%= image_tag(record.user.image_name.url) %><% end %></div>
-            <div class="username"><%= link_to(record.user.name, "/profiles/#{record.user.id}") %></div>
-            <div class="score"><%= record.score %></div>
-            <div class="level"><%= record.level%></div>
-            <div class="date"><%= record.updated_at.strftime("%Y/%m/%d") %></div>
-        </div>
-        <% end %>
-    </div>
+    <table class="infinite-blocks-records">
+        <thead>
+            <tr>
+                <td>Rank</td>
+                <td>User</td>
+                <td>Score</td>
+                <td>Level</td>
+                <td>Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @records.each.with_index(1) do |record, rank| %>
+            <tr>
+                <td><%= rank %></td>
+                <td><%= link_to("/profiles/#{record.user.id}") do %><%= image_tag(record.user.image_name.url) %><% end %><%= link_to(record.user.name, "/profiles/#{record.user.id}") %></td>
+                <td><%= record.score %></td>
+                <td><%= record.level%></td>
+                <td><%= record.updated_at.strftime("%Y/%m/%d") %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>
+<div style="text-align:center; margin-bottom: 60px"><%= link_to("ゲームに戻る", "/games/infinite-blocks") %></div>
 <div class="sponsored-link" style="margin-bottom:100px">
     <h6>Sponsored Link</h6>
     <div class="ads-body">Sponsored Link</div>

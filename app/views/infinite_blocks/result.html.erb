@@ -1,0 +1,52 @@
+<h1>Infinite Blocks</h1>
+<div class="infinite-blocks-result">
+    <h3>Thank you for playing!!</h3>
+    <table class="score-level">
+        <tbody>
+            <tr>
+                <td>SCORE：</td>
+                <td><%= @score %></td>
+            </tr>
+            <tr>
+                <td>LEVEL：</td>
+                <td><%= @level %></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="rank">
+        <tbody>
+            <tr>
+                <td>総合ランキング：</td>
+                <td><%= @rank %></td>
+            </tr>
+            <tr>
+                <td>年間ランキング：</td>
+                <td><%= @yearly_rank %></td>
+            </tr>
+            <tr>
+                <td>月間ランキング：</td>
+                <td><%= @monthly_rank %></td>
+            </tr>
+            <tr>
+                <td>週間ランキング：</td>
+                <td><%= @weekly_rank %></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<% if flash[:score] %>
+<%= form_tag("/games/infinite-blocks/result/tweet", class: "form-twitter") do %>
+<textarea name="content"><%= @content %></textarea>
+<input type="submit" value="結果をTwitterに投稿する" <%= @disabled %>>
+<% unless @has_twitter_account %>
+<div class="notice">Twitterに投稿するには、Twitter連携が必要です</div>
+<% end %>
+<% end %>
+<% end %>
+
+<div style="text-align:center; margin-top: 20px"><%= link_to("ランキング", "/games/infinite-blocks/records") %></div>
+<div style="text-align:center; margin-top: 5px"><%= link_to("ゲームに戻る","/games/infinite-blocks") %></div>
+<div class="sponsored-link" style="margin-top: 50px; margin-bottom:100px">
+    <h6>Sponsored Link</h6>
+    <div class="ads-body">Sponsored Link</div>
+</div>

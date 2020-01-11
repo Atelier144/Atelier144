@@ -19,6 +19,7 @@
 
 @import "forms";
 @import "header-footer";
+@import "infinite-blocks";
 
 $twitter-color: #1DA1F2;
 
@@ -236,41 +237,6 @@ a {
     }
 }
 
-.top-carousel-container {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    width: 100%;
-    height: 600px;
-    background-image: url("TopCarouselContainerBackground.png");
-}
-
-#top-carousel {
-    margin: 0px auto;
-    padding-top: 20px;
-    width: 760px;
-    height: 560px;
-    background-color: blue;
-    box-shadow: 0px 0px 10px 10px rgba(0, 0, 64, 0.5);
-
-
-    .carousel-inner {
-        margin: 0px auto;
-        width: 720px;
-        height: 480px;
-        box-shadow: 0px 0px 3px 8px rgba(255, 255, 255, 0.2);
-
-        .carousel-item {
-            width: 100%;
-            height: 100%;
-            background-color: black;
-
-            p {
-                color: white;
-            }
-        }
-    }
-}
-
 .top-background {
     width: 100%;
     height: 540px;
@@ -358,7 +324,7 @@ table.games {
                     background-color: white;
 
                     &:hover {
-                        background-color: #FFFFCF;
+                        background-color: #F2FFCC;
                     }
 
                     img {
@@ -827,8 +793,8 @@ ul.special-thanks {
 /*------------------------------GAME RECORDS------------------------------*/
 
 .games-records {
-    width: 640px;
-    margin: 0px auto 60px;
+    width: 720px;
+    margin: 0px auto 20px;
     padding: 0px 20px 10px;
     background-color: white;
     border: 1px solid #D8D8D8;
@@ -841,115 +807,103 @@ ul.special-thanks {
 
     }
 
-    .infinite-blocks-records {
-        margin: 0px;
+    table.infinite-blocks-records {
+        margin: 0px auto;
         padding: 0px;
 
-        .column-names {
-            width: 100%;
-            height: 40px;
-            line-height: 40px;
-            position: relative;
-            font-size: 18px;
-            font-weight: 200;
-            letter-spacing: 1px;
+        thead {
+            border-bottom: 1px solid #D8D8D8;
 
+            tr {
+                font-size: 20px;
+                font-weight: 200;
+                line-height: 40px;
+                letter-spacing: 1px;
 
-        }
+                td:nth-child(1) {
+                    text-align: center;
+                    width: 60px;
+                }
 
-        .record {
-            margin-top: 5px;
-            margin-bottom: 5px;
-            width: 100%;
-            height: 40px;
-            line-height: 40px;
-            position: relative;
-            font-size: 16px;
-            letter-spacing: 1px;
+                td:nth-child(2) {
+                    text-align: center;
+                    width: 240px;
+                }
 
-        }
+                td:nth-child(3) {
+                    text-align: center;
+                    width: 120px;
+                }
 
-        .rank {
-            width: 60px;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            text-align: center;
-        }
+                td:nth-child(4) {
+                    text-align: center;
+                    width: 60px;
+                }
 
-        .user {
-            position: absolute;
-            top: 0px;
-            left: 60px;
-            text-align: left;
-        }
-
-        .score {
-            width: 80px;
-            position: absolute;
-            top: 0px;
-            right: 180px;
-            text-align: center;
-        }
-
-        .level {
-            width: 60px;
-            position: absolute;
-            top: 0px;
-            right: 120px;
-            text-align: center;
-        }
-
-        .date {
-            width: 120px;
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            text-align: center;
-        }
-
-        .userimage {
-            width: 40px;
-            position: absolute;
-            top: 0px;
-            left: 60px;
-
-            a {
-                color: inherit;
-            }
-
-            img {
-                display: block;
-                width: 40px;
-                height: 40px;
-                border-radius: 20px;
+                td:nth-child(5) {
+                    text-align: center;
+                    width: 160px;
+                }
             }
         }
 
-        .username {
-            position: absolute;
-            top: 0px;
-            left: 120px;
-        }
+        tbody {
+            letter-spacing: 1px;
 
-        .gold {
-            color: gold;
-            font-weight: 800;
-        }
+            tr:nth-child(1) {
+                color: gold;
+                font-size: 20px;
+            }
 
-        .silver {
-            color: silver;
-            font-weight: 600;
-        }
+            tr:nth-child(2) {
+                color: silver;
+                font-size: 19px;
+            }
 
-        .bronze {
-            color: saddlebrown;
-            font-weight: 400;
-        }
+            tr:nth-child(3) {
+                color: chocolate;
+                font-size: 18px;
+            }
 
-        .regular {
-            color: black;
-            font-weight: 200;
+            tr:nth-child(4+n) {
+                color: black;
+                font-size: 16px;
+            }
+
+            td:nth-child(1) {
+                text-align: center;
+            }
+
+            td:nth-child(2) {
+                text-align: left;
+
+                img {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    margin-left: 5px;
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 20px;
+                }
+
+                a:nth-child(2) {
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+            }
+
+            td:nth-child(3) {
+                text-align: center;
+            }
+
+            td:nth-child(4) {
+                text-align: center;
+            }
+
+            td:nth-child(5) {
+                text-align: center;
+            }
         }
     }
 }
@@ -1018,112 +972,5 @@ ul.special-thanks {
                 }
             }
         }
-    }
-}
-
-.infinite-blocks-instructions {
-    width: 960px;
-    margin: 0px auto;
-
-    ul.explanations-menu {
-        margin-left: 20px;
-        list-style-type: circle;
-    }
-
-    ul.basic-explanations {
-        margin-left: 30px;
-        list-style-type: square;
-
-        li {
-            padding-top: 3px;
-            padding-bottom: 3px;
-        }
-    }
-
-    h3 {
-        margin-top: 50px;
-        margin-bottom: 10px;
-    }
-
-    table.screen-explanations {
-        margin-top: 20px;
-        border-collapse: separate;
-        border-spacing: 0px 5px;
-
-        tr {
-            td:nth-child(1) {
-                font-family: Monaco;
-                text-align: right;
-                letter-spacing: 1px;
-            }
-        }
-
-    }
-
-    table.effect-explanations {
-        border-collapse: separate;
-        border-spacing: 0px 5px;
-
-        tr {
-            td:nth-child(2) {
-                padding-left: 10px;
-            }
-        }
-    }
-
-    table.item-explanations {
-        border-collapse: separate;
-        border-spacing: 0px 5px;
-
-        tr {
-            padding-top: 10px;
-            padding-bottom: 10px;
-
-            td:nth-child(2) {
-                padding-left: 10px;
-
-                img {
-                    vertical-align: sub;
-                    margin-right: 5px;
-                    margin-left: 5px;
-                }
-            }
-        }
-    }
-
-    table.block-explanations {
-        border-collapse: separate;
-        border-spacing: 0px 5px;
-
-        tr {
-            td:nth-child(2) {
-                padding-left: 10px;
-
-                img {
-                    vertical-align: sub;
-                    margin-right: 5px;
-                    margin-left: 5px;
-                }
-            }
-        }
-
-    }
-
-    .counterfeit-warning {
-        margin-top: 20px;
-        border: 1px dashed red;
-        padding: 10px;
-
-        h6 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: red;
-            font-size: 20px;
-            font-weight: 500;
-        }
-    }
-
-    .other-blocks {
-        margin-top: 20px;
     }
 }

@@ -555,6 +555,22 @@
         text-align: center;
         color: #4D4D4D;
     }
+
+    .confirmation-message {
+        margin-top: 5px;
+        padding-left: 2px;
+        height: 15px;
+        line-height: 15px;
+        font-size: 12px;
+    }
+
+    .confirmation-message.ok {
+        color: green;
+    }
+
+    .confirmation-message.warning {
+        color: red;
+    }
 }
 
 /*------------------------------FORM OMEGA------------------------------*/
@@ -599,5 +615,43 @@
         background: none;
         border: none;
         color: #3399FF;
+    }
+}
+
+/*------------------------------FORM OMEGA------------------------------*/
+
+.form-twitter {
+    textarea {
+        display: none;
+    }
+
+    input[type="submit"] {
+        display: block;
+        margin: 0px auto;
+        width: 360px;
+        height: 40px;
+        background-color: #1DA1F2;
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        font-weight: 600;
+        color: white;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+    }
+
+    input[type="submit"][disabled] {
+        background-color: #E6E6E6;
+        color: white;
+        cursor: default;
+    }
+
+    .notice {
+        margin-top: 5px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 200;
+        line-height: 20px;
     }
 }

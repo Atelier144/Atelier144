@@ -20,15 +20,17 @@ Rails.application.routes.draw do
   get "/signup", to: "users#signup_form"
   post "/signup", to: "users#signup"
 
-  get "/login/forgot_password", to: "users#forgot_password_form"
-  post "/login/forgot_password", to: "users#forgot_password"
-  get "/login/forgot_password/certificated", to: "users#certificated_forgot_password"
+  get "/login/forgot-password", to: "users#forgot_password_form"
+  post "/login/forgot-password", to: "users#forgot_password"
+  get "/login/forgot-password/done", to: "users#forgot_password_done"
 
-  get "/new_password/:hash", to: "users#new_password_form"
-  post "/new_password/:hash", to: "users#new_password"
+  get "/new-password/done", to: "users#new_password_done"
+  get "/new-password/:hash", to: "users#new_password_form"
+  post "/new-password/:hash", to: "users#new_password"
 
-  post "/signup/username_confirmation", to: "users#signup_username_confirmation"
-  post "/signup/email_confirmation", to: "users#signup_email_confirmation"
+
+  post "/signup/username-confirmation", to: "users#signup_username_confirmation"
+  post "/signup/email-confirmation", to: "users#signup_email_confirmation"
 
   get "/auth/twitter/callback", to: "users#twitter"
   get "/auth/facebook/callback", to: "users#facebook"
@@ -62,8 +64,12 @@ Rails.application.routes.draw do
   get "/settings/email/create/done", to: "users#create_email_done"
 
   get "/games/infinite-blocks", to: "infinite_blocks#home"
+  get "/games/infinite-blocks/result", to: "infinite_blocks#result"
   get "/games/infinite-blocks/records", to: "infinite_blocks#records"
   get "/games/infinite-blocks/records/:type", to: "infinite_blocks#records"
+
+  post "/games/infinite-blocks/result/tweet", to: "infinite_blocks#tweet"
+  get "/games/infinite-blocks/result/tweet-done", to: "infinite_blocks#tweet_done"
 
   post "/games/infinite-blocks/record", to: "infinite_blocks#record"
 

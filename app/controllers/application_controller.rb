@@ -21,4 +21,20 @@ class ApplicationController < ActionController::Base
       redirect_to("/")
     end
   end
+
+  def does_exist_user
+    unless User.find_by(id: params[:id])
+      flash[:notice] = "そのアカウントは存在しません"
+      redirect_to("/")
+    end
+  end
+
+  def set_twitter_client
+    @twitter_client = Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.credentials.twitter_api[:key]
+      config.consumer_secret = Rails.application.credentials.twitter_api[:secret]
+      config.access_token = Rails.application.credentials.twitter_api[:access]
+      config.access_token_secret = Rails.application.credentials.twitter_api[:access_secret]
+    end
+  end
 end
