@@ -1,0 +1,15 @@
+current directory: /Users/amestric/Documents/RailsProjects/Atelier144/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+/Users/amestric/.rbenv/versions/2.5.1/bin/ruby -r ./siteconf20200113-40037-ex160h.rb extconf.rb
+creating Makefile
+
+current directory: /Users/amestric/Documents/RailsProjects/Atelier144/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/amestric/Documents/RailsProjects/Atelier144/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/cruby.bundle
+
+current directory: /Users/amestric/Documents/RailsProjects/Atelier144/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20200113-40037-gdpv93/skiptrace
